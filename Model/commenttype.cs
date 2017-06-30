@@ -10,7 +10,8 @@ namespace Model
     {
         public int commenttypeid { get; set; }
         public string typename { get; set; }
+public int isdelete { get; set; }
 
-      
+
     }
 }

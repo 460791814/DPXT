@@ -13,6 +13,10 @@ namespace DPXT.Controllers
     public class CommentTypeController : Controller
     {
         D_CommentType dal = new D_CommentType();
+        /// <summary>
+        /// 列表
+        /// </summary>
+        /// <returns></returns>
         // GET: CommentType
         public ActionResult List()
         {
@@ -21,7 +25,11 @@ namespace DPXT.Controllers
             ViewBag.list = dal.GetList();
             return View();
         }
-
+        /// <summary>
+        /// 保存
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public bool Save(commenttype model)
         {
             if (model != null && model.commenttypeid > 0)
@@ -30,8 +38,23 @@ namespace DPXT.Controllers
             }
             return dal.Add(model);
         }
-
-
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool Delete(commenttype model)
+        {
+ 
+                return dal.DeleteById(model);
+      
+          
+        }
+        /// <summary>
+        /// 详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Info(int id)
         {
 

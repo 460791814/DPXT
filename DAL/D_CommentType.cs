@@ -23,7 +23,7 @@ namespace DAL
             List<commenttype> list;
        
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select * from commenttype"); 
+            strSql.Append("select * from commenttype where isdelete=0"); 
 
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
@@ -90,6 +90,30 @@ namespace DAL
  
             StringBuilder strSql = new StringBuilder();
             strSql.Append("update CommentType set typename=@typename  where commenttypeid=@commenttypeid ");
+
+            using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
+            {
+                int count = conn.Execute(strSql.ToString(), model);
+                if (count > 0)//如果更新失败
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool DeleteById(commenttype model)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update CommentType set isdelete=1  where commenttypeid=@commenttypeid ");
 
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
