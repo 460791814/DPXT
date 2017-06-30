@@ -1,0 +1,441 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>点评系统</title>
+  
+    <!-- Bootstrap Core CSS -->
+    <link href="/Skins/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="/Skins/admin/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="/Skins/admin/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- DataTables Responsive CSS -->
+    <link href="/Skins/admin/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/Skins/admin/dist/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="/Skins/admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- 附加样式-->
+    <link href="/Skins/css/layout.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- jQuery -->
+    <script src="http://aui.github.io/artDialog/lib/jquery-1.10.2.js"></script>
+
+
+</head>
+<body>
+    <!--顶部内容-->
+    <div class="index_header">
+        <div class="lg lf"><a href="/home/index"><img src="/skins/images/logo.png" width="448" height="70" /></a></div>
+        <div class="xx rt">
+            2017-02-26&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;星期日<br />
+            <i>郑州</i> <a href="#">【切换城市】</a><span>晴&nbsp;&nbsp;&nbsp;&nbsp;16~2°C</span>
+        </div>
+        <div style="overflow:hidden; clear:both; height:0px;"></div>
+    </div>
+
+
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">XXX，您好！&nbsp;&nbsp;&nbsp;&nbsp;角色：<span style="color:#0361af;">XXXX</span></a>
+            </div>
+            <!-- /.navbar-header -->
+            <ul class="nav navbar-top-links navbar-right">
+
+                @*
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend/Skins/admin.</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend/Skins/admin.</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend/Skins/admin.</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>Read All Messages</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 1</strong>
+                                        <span class="pull-right text-muted">40% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            <span class="sr-only">40% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 2</strong>
+                                        <span class="pull-right text-muted">20% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                            <span class="sr-only">20% Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 3</strong>
+                                        <span class="pull-right text-muted">60% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% Complete (warning)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 4</strong>
+                                        <span class="pull-right text-muted">80% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80% Complete (danger)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Tasks</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-tasks -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> New Comment
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <span class="pull-right text-muted small">12 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-tasks fa-fw"></i> New Task
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Alerts</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-alerts -->
+                </li>
+                *@
+
+
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> 帮助中心</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 退出</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+
+            <!-- /.navbar-top-links 左侧菜单项-->
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <a href="/home/index" style="font-size:14px;font-weight:bold; text-align:center; color:#0361af;">检测中心</a>
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-thermometer-2 fa-fw"></i> 实验室管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="/Documents/Index">体系文件</a></li>
+                                <li>
+                                    <a href="#">文件管理 <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li><a href="/Documents/Index?doc_Type=工作手册">工作手册</a></li>
+                                        <li><a href="/DocManagerWithDir/Index">专业资料</a></li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-medkit fa-fw"></i> 药品管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="/Drug/Index">药品维护</a></li>
+                                <li><a href="/Drug/DrugIn">药品入库</a></li>
+                                <li><a href="/Drug/DrugOut" class="">药品出库</a></li>
+                                <li><a href="/Drug/DrugCheck"  class="">药品盘点</a></li>
+                                <li><a href="/Drug/DrugReport" class="">药品统计</a></li>
+                                <li><a href="/Drug/DrugLock"  class="">药品柜管理</a></li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-flask fa-fw"></i> 仪器设备<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="/Device/Index" class="">仪器设备维护</a></li>
+                                <li><a href="/Device/DeviceIN" class="">仪器设备入库</a></li>
+                                <li><a href="/Device/DeviceOUT" class="">仪器设备出库</a></li>
+                                <li><a href="/Device/DeviceLog" class="">仪器设备盘点</a></li>
+                                <li><a href="/Measure/MeasureCheck" class="">计量管理</a></li> 
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-hourglass-half fa-fw"></i> 易耗品<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="/EasyConsume/Index" class="">易耗品维护</a></li>
+                                <li><a href="/EasyConsume/EasyConsumeIN" class="">易耗品入库</a></li>
+                                <li><a href="/EasyConsume/EasyConsumeOUT" class="">易耗品出库</a></li>
+                                <li><a href="/EasyConsume/EasyConsumeLog" class="">易耗品盘点</a></li>
+                               
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-book fa-fw"></i> 图书资料<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="/Book/Index">图书资料管理</a></li>
+                                <li><a href="/Book/BorrowManage">图书资料借阅</a></li>
+                                <li><a href="/Book/BookLog">图书统计</a></li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+
+
+                        <li>
+                            <a href="#"><i class="fa fa-bank fa-fw"></i> 实验管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="/Laboratory/LaboratoryList">实验室信息</a></li>
+                                <li><a href="/Project/ProjectList">项目一览</a></li>
+                                <li><a href="/ExpePlan/ExpePlanList">实验计划</a></li>
+                                <li><a href="/OriginalRecord/OriginalRecordList">原始记录</a></li>
+                                <li><a href="/TestReport/TestReportList">检验报告</a></li>
+                                <li><a href="/ExpeStatistics/ExpeStatisticsList">实验统计</a></li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-balance-scale fa-fw"></i> 样品管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="/Sample/Index">样品管理</a></li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+
+
+                        <li>
+                            <a href="#"><i class="fa fa-vcard fa-fw"></i> 人员管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="/PersonAptitude/PersonAptitudeList">人员资质</a></li>
+                                <li><a href="/OutPersonnel/OutPersonnelList">外来人员</a></li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> 客户管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="/ClientManage/ClientManageList">客户管理</a></li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-cog fa-fw"></i> 系统管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="/ShowImage/ShowImageList" target="mainFrame" class="">首页图片管理</a></li>
+                                <li><a href="/Magazine/MagazineList" target="mainFrame" class="">电子杂志管理</a></li>
+                                <li><a href="/News/NewsList" target="mainFrame" class="">公告通知</a></li>
+                                <li><a href="/InPersonnel/InPersonnelList" target="mainFrame">用户管理</a></li>
+                                <li><a href="/Role/RoleList" target="mainFrame">角色管理</a></li>
+                                <li><a href="/Action/ActionList" target="mainFrame">系统模块管理</a></li>
+                                <li><a href="/Area/AreaList" target="mainFrame">区域管理</a></li>
+                                <li><a href="/TypeDict/TypeDictList?SubjectID=1" target="mainFrame" class="">公告类别管理</a></li>
+                                <li><a href="/TypeDict/TypeDictList?SubjectID=2" target="mainFrame">项目类别管理</a></li>
+                                <li><a href="/TypeDict/TypeDictList?SubjectID=3" target="mainFrame">职务类别管理</a></li>
+                                <li><a href="/TypeDict/TypeDictList?SubjectID=4" target="mainFrame">实验室类别</a></li>
+                                <li><a href="/TypeDict/TypeDictList?SubjectID=5" target="mainFrame">检验类别管理</a></li>
+                                <li><a href="/ContractImg/ContractImgList" target="mainFrame">合同图标管理</a></li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <div id="page-wrapper">
+            <div style="margin-bottom: 30px; margin-bottom: 20px; background-color: #fff; border: 1px solid transparent;"></div>
+            @RenderBody()
+
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/Skins/admin/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/Skins/admin/vendor/metisMenu/metisMenu.min.js"></script>
+    <!-- DataTables JavaScript -->
+    @*<script src="/Skins/admin/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="/Skins/admin/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="/Skins/admin/vendor/datatables-responsive/dataTables.responsive.js"></script>*@
+    <!-- Custom Theme JavaScript -->
+    <script src="/Skins/admin/dist/js/sb-admin-2.js"></script>
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+ 
+</body>
+</html>
+
