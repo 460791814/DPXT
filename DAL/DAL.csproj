@@ -46,10 +46,21 @@
   <ItemGroup>
     <Compile Include="DapperHelper.cs" />
     <Compile Include="DataUtils.cs" />
+    <Compile Include="D_CommentType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Comp\Comp.csproj">
+      <Project>{47836417-e9a1-4afb-86dd-eacc0c37f24b}</Project>
+      <Name>Comp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{be0afced-5872-476c-8cf9-e103d1f74bee}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
