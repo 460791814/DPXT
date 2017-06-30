@@ -1,0 +1,23 @@
+﻿@charset "utf-8";
+*{width:100%; height:100%; overflow:hidden;}
+.login{width:100%; height:100%; background:url(../images/bj.jpg) no-repeat center / cover; position:relative;}
+.login .con{width:990px; padding:0 10px; height:auto; position:absolute; top:50%; margin-top:-272px; left:50%; margin-left:-495px;}
+.login .con .lg{width:100%; height:auto; margin-bottom:20px;}
+.login .con .ck{width:100%; height:auto; background-color:#fafcfc; box-shadow:0 0 10px #666;}
+.login .con .tp{width:495px; height:auto;}
+.login .con .nr{width:450px; height:auto; margin-right:23px; margin-top:30px;}
+.login .con .nr h3{font-size:32px; color:#0060da; text-align:center; padding-bottom:20px; border-bottom:1px dashed #a0a0a0;}
+.login .con .nr em{font-size:22px; font-style:normal; color:#cfd0d0;}
+.login .con .nr .dl{width:382px; height:auto; padding:8px; margin:30px auto 0;}
+.login .con .nr p{font-size:14px; line-height:50px; color:#333; background:url(../images/th.png) no-repeat left center; padding-left:20px; margin-bottom:20px;}
+.login .con .nr input.hy{width:310px; height:50px; padding:0 5px 0 65px; border:1px solid #e7e7e7; border-radius:5px; background:#fff url(../images/rw.png) no-repeat left center; font-size:14px; line-height:50px; color:#555; display:block; margin-bottom:30px;}
+.login .con .nr input.mm{width:310px; height:50px; padding:0 5px 0 65px; border:1px solid #e7e7e7; border-radius:5px; background:#fff url(../images/mm.png) no-repeat left center; font-size:14px; line-height:50px; color:#555; display:block;}
+.login .con .nr input.hy:focus, .login .con .nr input.mm:focus{
+-webkit-box-shadow:0 0 8px #b0d1fb;
+-moz-box-shadow:0 0 8px #b0d1fb;
+-o-box-shadow:0 0 8px #b0d1fb;
+-ms-box-shadow:0 0 8px #b0d1fb;
+box-shadow:0 0 8px #b0d1fb;}
+.login .con .nr input.an{width:382px; height:50px; border:0; background-color:#0060da; font-size:16px; line-height50px; text-align:center; color:#fff; cursor:pointer; margin:0 auto; display:block;}
+.login .con .nr input.an:hover{background-color:#0358c5;}
+.login .con .bq{font-size:14px; text-align:center; color:#fff; margin-top:20px;}

@@ -1,0 +1,10 @@
+﻿@charset "utf-8";
+/*顶部Logo*/
+.index_header{width:100%; padding:33px 0 17px; background-color:#0361af; box-shadow:0 0 5px #d8d8d8; position:relative; z-index:999;}
+.index_header .lg{width:448px; margin-left:50px;}
+.index_header .xx{font-size:14px; line-height:34px; color:#fcfcfc; text-align:right; margin-right:50px;}
+.index_header .xx i{font-style:normal; color:#ffd530;}
+.index_header .xx a{color:#fcfcfc;}
+.index_header .xx span{display:inline-block; background:url(/skins/images/tq.png) no-repeat left center; margin-left:30px; padding-left:25px;}
+.index_header .lf {float:left}
+.index_header .rf {float:right}
