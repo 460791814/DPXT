@@ -46,7 +46,10 @@
   <ItemGroup>
     <Compile Include="DapperHelper.cs" />
     <Compile Include="DataUtils.cs" />
+    <Compile Include="D_Area.cs" />
+    <Compile Include="D_ClassInfo.cs" />
     <Compile Include="D_CommentType.cs" />
+    <Compile Include="D_User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
