@@ -40,5 +40,10 @@ namespace Model
         /// 更新时间
         /// </summary>
         public DateTime updatetime { get; set; }
+
+        /// <summary>
+        /// 页码
+        /// </summary>
+        public int pageindex{get;set;}
     }
 }

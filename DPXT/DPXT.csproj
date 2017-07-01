@@ -345,6 +345,8 @@
     <Content Include="Views\Share\_LayOut.cshtml" />
     <Content Include="Views\CommentType\List.cshtml" />
     <Content Include="Views\CommentType\Info.cshtml" />
+    <Content Include="Views\User\Info.cshtml" />
+    <Content Include="Views\User\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -355,7 +357,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Comp\Comp.csproj">
