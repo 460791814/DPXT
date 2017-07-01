@@ -68,8 +68,8 @@ namespace DAL
         /// </summary>
         public bool Add(user model)
         {
-            string sql = @"INSERT INTO [comment].[dbo].[dp_user]([username],[password],[areaid],[classinfoid],[updatetime]) 
-                            VALUES (@username,@password,@areaid,@classinfoid,@updatetime)";
+            string sql = @"INSERT INTO [comment].[dbo].[dp_user]([realname],[username],[password],[areaid],[classinfoid],[updatetime]) 
+                            VALUES (@realname,@username,@password,@areaid,@classinfoid,@updatetime)";
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
                 int count = conn.Execute(sql, model);
@@ -92,7 +92,8 @@ namespace DAL
 
             StringBuilder strSql = new StringBuilder();
             strSql.Append(@"UPDATE [comment].[dbo].[dp_user]
-                               SET [username] = @username
+                               SET [realname] = @realname 
+                                  ,[username] = @username
                                   ,[password] = @password
                                   ,[areaid] = @areaid
                                   ,[classinfoid] = @classinfoid

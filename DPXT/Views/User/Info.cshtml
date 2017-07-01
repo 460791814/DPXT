@@ -1,6 +1,7 @@
-﻿@{
+﻿@using Model;
+@{
     Layout = null;
-    var info = ViewBag.Info == null ? new Model.commenttype() : (Model.commenttype)ViewBag.Info;
+    var info = ViewBag.Info == null ? new Model.user() : (Model.user)ViewBag.Info;
 }
 
 <!DOCTYPE html>
@@ -18,34 +19,82 @@
     <div>
         <div role="form">
             <div class="form-group">
-                <label>维度名称：</label>
-                <input class="form-control" id="typename" value="@info.typename">
-                <input type="hidden" id="hid" value="@info.commenttypeid" />
+                <label>作业区：</label>
+                <select class="form-control" id="area" onchange="loadclassinfolist(0)">
+                     @{ 
+                         var arealist = ViewBag.arealist as List<area>;
+                         foreach (var item in arealist)
+                         { 
+
+                             <option value="@item.id" @((item.id == info.areaid) ? "selected" : "")>@item.name</option>
+                         }
+                     }
+                </select>
+                <label>班组：</label>
+                <select class="form-control" id="classinfo"></select>
+                <label>管理员名称：</label>
+                <input class="form-control" id="realname" value="@info.realname" />
+                <label>登陆用户名：</label>
+                <input class="form-control" id="username" value="@info.username" />
+                <label>登陆密码：：</label>
+                <input class="form-control" id="password" value="@info.password" />
+
+                <!--隐藏属性-->
+                <input type="hidden" id="userid" value="@info.userid"/>
+                <input type="hidden" id="classinfoid" value="@info.classinfoid"/>
             </div>
 
-
-            <button type="button" class="btn btn-primary" onclick="save()">保存</button>
-
+            <!--提交按钮-->
+            <div style="width:100%;text-align:right;">
+                <button type="button" class="btn btn-primary" onclick="save()">保存</button>
+            </div>
         </div>
     </div>
-    <script>
+
+    <script type="text/javascript">
+
         function ok() {
             top.dialog.get('id-info').close()
         }
-    </script>
 
-    <script>
+        //加载班组
+        function loadclassinfolist(isload)
+        {
+            var areaid = $("#area").val();
+            var data = "areaid=" + areaid;
+            $.post("/User/GetClassInfoList", data, function (data) {
+                if (data)
+                {
+                    var classinfohtml = "";
+                    var jsondata = eval(data);
+                    for (var i = 0; i < jsondata.length; i++) {
+                        classinfohtml += "<option value="+jsondata[i]["id"]+">" + jsondata[i]["cname"] + "</option>";
+                    }
+                    $("#classinfo").html(classinfohtml);
+                    if (isload == 1) { //判断是否为首次加载
+                        $("#classinfo").val($("#classinfoid").val());
+                    }
+                }
+            });
+        }
 
+        //保存
         function save() {
 
-            var typename = $("#typename").val();
-            var commenttypeid = $("#hid").val();
-            var data = "typename=" + typename + "&commenttypeid=" + commenttypeid
+            var userid = $("#userid").val();
+
+            var areaid = $("#area").val();
+            var classinfoid = $("#classinfo").val();
+
+            var realname = $("#realname").val();
+
+            var username = $("#username").val();
+            var password = $("#password").val();
+            var data = "userid=" + userid + "&areaid=" + areaid + "&classinfoid=" + classinfoid + "&realname=" + realname + "&username=" + username + "&password=" + password;
             //ajax
-            $.post("/CommentType/Save", data, function (data) {
+            $.post("/User/Save", data, function (data) {
                 if (data == "True") {
                     top.window.location.reload();
-
                 } else {
                     //消息
                     dialog({
@@ -54,11 +103,13 @@
                     }).show();
                 }
             });
-
             return false;
-
         }
 
+        //页面初始化内容
+        $(document).ready(function () {
+            loadclassinfolist(1);//初始化选择班组
+        });
     </script>
 
 </body>

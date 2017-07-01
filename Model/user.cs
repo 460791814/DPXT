@@ -11,10 +11,16 @@ namespace Model
     /// </summary>
     public class user
     {
+        
         /// <summary>
         /// 用户ID
         /// </summary>
         public int userid { get; set; }
+
+        /// <summary>
+        /// 真实姓名
+        /// </summary>
+        public string realname { get; set; }
 
         /// <summary>
         /// 用户名

@@ -18,14 +18,14 @@ namespace DAL
         /// <summary>
         /// 查询
         /// </summary>
-        public List<classinfo> GetList()
+        public List<classinfo> GetList(classinfo model)
         {
             List<classinfo> list;
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select * from classinfo");
+            strSql.Append("select * from classinfo where areaid=@areaid");
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
-                list = conn.Query<classinfo>(strSql.ToString())?.ToList();
+                list = conn.Query<classinfo>(strSql.ToString(), model)?.ToList();
             }
             return list;
         }

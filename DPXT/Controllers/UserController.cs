@@ -1,6 +1,7 @@
 ﻿using Comp;
 using DAL;
 using Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,20 +27,30 @@ namespace DPXT.Controllers
             searchmodel.pagesize = 15;
             searchmodel.pageindex = pageIndex;
             ViewBag.userlist = daluser.GetList(searchmodel);           //用户列表
-            ViewBag.arealist = dalarea.GetList();                      //作业区列表
-            ViewBag.classinfolist = dalclassinfo.GetList();            //班组列表
+            
             int count = daluser.GetCount();
             ViewBag.page = Utils.ShowPage(count, searchmodel.pagesize, pageIndex, 5);
 
             return View();
         }
-        
+
+        /// <summary>
+        /// 获取班组列表
+        /// </summary>
+        public JsonResult GetClassInfoList(int areaid)
+        {
+            classinfo model = new classinfo();
+            model.areaid = areaid;
+            return Json(JsonConvert.SerializeObject(dalclassinfo.GetList(model)));
+        }
+
         /// <summary>
         /// 保存
         /// </summary>
         public bool Save(user model)
         {
-            if (model != null && model.userid > 0)//若存在数据，执行更新
+            model.updatetime = DateTime.Now;
+            if (model.userid > 0)//若存在数据，执行更新
             {
                 return daluser.Update(model);
             }
@@ -49,8 +60,10 @@ namespace DPXT.Controllers
         /// <summary>
         /// 删除
         /// </summary>
-        public bool Delete(user model)
+        public bool Delete(int id)
         {
+            user model = new user();
+            model.userid = id;
             return daluser.DeleteById(model);
         }
 
@@ -62,6 +75,7 @@ namespace DPXT.Controllers
             user model = new user();
             model.userid = id;
             ViewBag.Info = daluser.GetInfoById(model);
+            ViewBag.arealist = dalarea.GetList();                      //作业区列表
             return View();
         }
     }
