@@ -32,9 +32,19 @@ namespace Model
         public int areaid { get; set; }
 
         /// <summary>
+        /// 作业区名称
+        /// </summary>
+        public string areaname { get; set; }
+
+        /// <summary>
         /// 班组ID
         /// </summary>
         public int classinfoid { get; set; }
+
+        /// <summary>
+        /// 班组名称
+        /// </summary>
+        public string classinfoname { get; set; }
 
         /// <summary>
         /// 更新时间
@@ -45,5 +55,11 @@ namespace Model
         /// 页码
         /// </summary>
         public int pageindex{get;set;}
+
+        /// <summary>
+        /// 每页显示数据条数
+        /// </summary>
+        public int pagesize { get; set; }
+        
     }
 }

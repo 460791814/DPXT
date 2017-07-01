@@ -21,12 +21,16 @@ namespace DPXT.Controllers
         public ActionResult List()
         {
             int pageIndex = Utils.GetInt(Request["page"]);
+            
+            user searchmodel = new user();
+            searchmodel.pagesize = 15;
+            searchmodel.pageindex = pageIndex;
+            ViewBag.userlist = daluser.GetList(searchmodel);           //用户列表
+            ViewBag.arealist = dalarea.GetList();                      //作业区列表
+            ViewBag.classinfolist = dalclassinfo.GetList();            //班组列表
             int count = daluser.GetCount();
-            ViewBag.page = Utils.ShowPage(count, 15, pageIndex, 5);
+            ViewBag.page = Utils.ShowPage(count, searchmodel.pagesize, pageIndex, 5);
 
-            ViewBag.userlist = daluser.GetList();           //用户列表
-            ViewBag.arealist = dalarea.GetList();           //作业区列表
-            ViewBag.classinfolist = dalclassinfo.GetList(); //班组列表
             return View();
         }
         

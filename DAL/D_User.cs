@@ -18,14 +18,19 @@ namespace DAL
         /// <summary>
         /// 查询
         /// </summary>
-        public List<user> GetList()
+        public List<user> GetList(user model)
         {
             List<user> list;
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select * from dp_user");
+            strSql.Append(@"select * from
+                        (
+                            select row_number()over(order by userid asc) as rowid, dp_user.*, Area.Name as areaname, ClassInfo.CName as classinfoname from dp_user with (nolock)
+                            left join dbo.Area on dp_user.areaid = dbo.Area.id
+                            left join dbo.ClassInfo on dp_user.classinfoid = dbo.ClassInfo.id
+                        ) as T where t.rowid between @pageindex*@pagesize and (@pageindex+1)*@pagesize");
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
-                list = conn.Query<user>(strSql.ToString())?.ToList();
+                list = conn.Query<user>(strSql.ToString(), model)?.ToList();
             }
             return list;
         }
