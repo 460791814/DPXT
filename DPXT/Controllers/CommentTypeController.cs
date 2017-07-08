@@ -30,7 +30,7 @@ namespace DPXT.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool Save(commenttype model)
+        public bool Save(E_CommentType model)
         {
             if (model != null && model.commenttypeid > 0)
             {
@@ -43,7 +43,7 @@ namespace DPXT.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool Delete(commenttype model)
+        public bool Delete(E_CommentType model)
         {
  
                 return dal.DeleteById(model);
@@ -58,7 +58,7 @@ namespace DPXT.Controllers
         public ActionResult Info(int id)
         {
 
-            commenttype model = new commenttype();
+            E_CommentType model = new E_CommentType();
             model.commenttypeid = id;
             ViewBag.Info = dal.GetInfoById(model);
             return View();

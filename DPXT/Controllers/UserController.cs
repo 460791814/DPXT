@@ -23,7 +23,7 @@ namespace DPXT.Controllers
         {
             int pageIndex = Utils.GetInt(Request["page"]);
             
-            user searchmodel = new user();
+            E_User searchmodel = new E_User();
             searchmodel.pagesize = 15;
             searchmodel.pageindex = pageIndex;
             ViewBag.userlist = daluser.GetList(searchmodel);           //用户列表
@@ -39,7 +39,7 @@ namespace DPXT.Controllers
         /// </summary>
         public JsonResult GetClassInfoList(int areaid)
         {
-            classinfo model = new classinfo();
+            E_ClassInfo model = new E_ClassInfo();
             model.areaid = areaid;
             return Json(JsonConvert.SerializeObject(dalclassinfo.GetList(model)));
         }
@@ -47,7 +47,7 @@ namespace DPXT.Controllers
         /// <summary>
         /// 保存
         /// </summary>
-        public bool Save(user model)
+        public bool Save(E_User model)
         {
             model.updatetime = DateTime.Now;
             if (model.userid > 0)//若存在数据，执行更新
@@ -62,7 +62,7 @@ namespace DPXT.Controllers
         /// </summary>
         public bool Delete(int id)
         {
-            user model = new user();
+            E_User model = new E_User();
             model.userid = id;
             return daluser.DeleteById(model);
         }
@@ -72,7 +72,7 @@ namespace DPXT.Controllers
         /// </summary>
         public ActionResult Info(int id)
         {
-            user model = new user();
+            E_User model = new E_User();
             model.userid = id;
             ViewBag.Info = daluser.GetInfoById(model);
             ViewBag.arealist = dalarea.GetList();                      //作业区列表

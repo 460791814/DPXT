@@ -2,342 +2,138 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>@ViewBag.Title</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="/Skins/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- MetisMenu CSS -->
-    <link href="/Skins/admin/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="/Skins/admin/dist/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/Skins/admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <script src="http://aui.github.io/artDialog/lib/jquery-1.10.2.js"></script>
-    <style>
-        .menudisable {
-            display: none
-        }
-
-        h4 {
-            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-            font-size: 14px;
-            line-height: 1.42857143;
-            margin-top: 0px;
-            margin-bottom: 0px;
-        }
-
-        .media-heading {
-            margin-bottom: 0px;
-        }
-
-        .top10 {
-            margin-top: 10px;
-        }
-    </style>
-    @RenderSection("header", false)
-</head>
-<body>
-    <div id="wrapper">
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">点评系统管理后台</a>
-            </div>
-            <!-- /.navbar-header -->
-            <!-- /.navbar-header -->
-            <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>Read All Messages</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-messages -->
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-tasks">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 1</strong>
-                                        <span class="pull-right text-muted">40% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                            <span class="sr-only">40% Complete (success)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 2</strong>
-                                        <span class="pull-right text-muted">20% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                            <span class="sr-only">20% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 3</strong>
-                                        <span class="pull-right text-muted">60% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                            <span class="sr-only">60% Complete (warning)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 4</strong>
-                                        <span class="pull-right text-muted">80% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                            <span class="sr-only">80% Complete (danger)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Tasks</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-tasks -->
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small">12 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Alerts</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-alerts -->
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li>
-                            <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-            <!-- /.navbar-top-links -->
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        
-            
-                        <li>
-                            <a href="#"><i class="fa  fa-fw"></i>点评内容<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li><a href="#">点评主题</a></li>
-                                <li><a href="#">点评项</a></li>
-                                <li><a href="#">意见</a></li>
-                                <li><a href="/CommentType/List">评价维度</a></li>
-                                <li><a href="#">菜品管理</a></li>
-                                <li><a href="#">员工点评</a></li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-
-                        <li>
-                            <a href="#"><i class="fa  fa-fw"></i>点评统计<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li><a href="#">综合平均统计</a></li>
-                                <li><a href="#">性别口径统计</a></li>
-                                <li><a href="#">年龄口径统计</a></li>
-                                <li><a href="#">饮食习惯口径统计</a></li>
-                                <li><a href="#">工作性质口径统计</a></li>
-                                <li><a href="#">员工点评统计</a></li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-
-                        <li>
-                            <a href="#"><i class="fa  fa-fw"></i>系统管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li><a href="/User/List">系统管理员</a></li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
- 
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
-        <div id="page-wrapper">
-            <div style="margin-bottom: 30px; margin-bottom: 20px; background-color: #fff; border: 1px solid transparent;"></div>
-            @RenderBody()
-        </div>
-        <!-- /#page-wrapper -->
-    </div>
-    <!-- /#wrapper -->
-    <!-- jQuery -->
-
-
- 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/Skins/admin/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="/Skins/admin/vendor/metisMenu/metisMenu.min.js"></script>
+    <title>学科网主数据管理系统 V1.0</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" href="data:image/png;base64,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" type="image/png">
     
+    @*<link rel="stylesheet" href="/skins/bower_components/bootstrap/dist/css/bootstrap.min.css">*@
+    <link href="/skins/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    @*<link rel="stylesheet" href="/skins/styles/sb-admin-2.css">*@
+    <link href="/skins/admin/dist/css/sb-admin-2.css" rel="stylesheet" />
+
+    @*<link rel="stylesheet" href="/skins/bower_components/metisMenu/dist/metisMenu.min.css">*@
+    <link href="/skins/admin/vendor/metisMenu/metisMenu.min.css" rel="stylesheet" />
+
+    @*<link rel="stylesheet" href="/skins/bower_components/font-awesome/css/font-awesome.min.css" type="text/css">*@
+    <link href="/skins/admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/skins/css/custom.css">
+
+    @*<script src="/skins/bower_components/jquery/dist/jquery.min.js"></script>*@
+    <script src="~/skins/js/jquery.min.js"></script>
+
+    @*<script src="/skins/bower_components/metisMenu/dist/metisMenu.min.js"></script>*@
+    <script src="~/skins/admin/vendor/metisMenu/metisMenu.min.js"></script>
+
+    @*<script src="/skins/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>*@
+    <script src="/skins/admin/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="/skins/admin/dist/js/sb-admin-2.js"></script>
+</head>
+
+<body class="">
+    <div ng-app="mdmApp" class="ng-scope">
+        <div class="alert-wrapper"></div>
+        <div ui-view="" class="ng-scope">
+            <div id="wrapper" class="ng-scope">
+                <!-- Navigation -->
+                <nav class="navbar navbar-default navbar-static-top" role="navigation">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="index.html"><i class="fa fa-database"></i> <strong><span class="hidden-xs">学科网主数据管理系统 V1.0</span></strong> </a>
+                        <button type="button" class="navbar-toggle menu-control" data-toggle="collapse" data-target=".navbar-collapse" onclick="$('body').toggleClass('mini-navbar')">
+                            <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <!-- /.navbar-header -->
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle ng-binding" data-toggle="dropdown" href="" aria-expanded="true">
+                                <i class="fa fa-user fa-fw"></i> xxxxx <i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li>
+                                    <div class="dropdown-user-info">
+                                        <p class="text-success ng-binding">XXX</p>
+                                        <p class="text-muted ng-binding"><span>ID：</span>XXX</p>
+                                        <p class="text-muted ng-binding"><span>姓名：</span>张三</p>
+                                        <p class="text-muted ng-binding"><span>作业区：</span></p>
+                                        <p class="text-muted ng-binding"><span>班组：</span></p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!-- /.dropdown-user -->
+                        </li>
+                        <li title="注销"> <a href="" ng-click="logout()"> <i class="glyphicon glyphicon-log-in"></i> 注销 </a> </li>
+                    </ul>
+                    <div class="navbar-default sidebar navbar-static-side ng-isolate-scope" role="navigation">
+                        <div class="sidebar-nav sidebar-collapse active">
+                            <ul class="nav in collapse" id="side-menu">
+                                <li class="active"> <a href="#/mdm/home" ui-sref="mdm.home"><i class="fa fa fa-desktop fa-fw"></i> <span class="nav-label">首页</span></a> </li>
+                                <!-- hasPermission: 'mdm.menu:basedata:r' -->
+                                <li has-permission="'mdm.menu:basedata:r'" class="ng-scope">
+                                    <a href=""><i class="fa fa-database fa-fw"></i> <span class="nav-label">基本数据管理</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level collapse">
+                                        <!-- hasPermission: 'mdm.menu:basedata:area' -->
+                                        <li has-permission="'mdm.menu:basedata:area'" class="ng-scope"> <a href="#/mdm/area_index" ui-sref="mdm.area_index"><i class="fa fa-globe"></i>地区</a> </li>
+                                        <!-- hasPermission: 'mdm.menu:basedata:organization' -->
+                                        <li has-permission="'mdm.menu:basedata:organization'" class="ng-scope"> <a ui-sref="mdm.org_index" href="#/mdm/org_index"><i class="fa fa-share-alt"></i>组织</a> </li>
+                                        <!-- hasPermission: 'mdm.menu:basedata:stage' -->
+                                        <li has-permission="'mdm.menu:basedata:stage'" class="ng-scope"> <a ui-sref="mdm.stage_index" href="#/mdm/stage_index"><i class="fa fa-mortar-board"></i>学段</a> </li>
+                                        <!-- hasPermission: 'mdm.menu:basedata:grade:r' -->
+                                        <li has-permission="'mdm.menu:basedata:grade:r'" class="ng-scope"> <a ui-sref="mdm.grade_index" href="#/mdm/grade_index"><i class="fa fa-reorder"></i>年级</a> </li>
+                                        <!-- hasPermission: 'mdm.menu:basedata:subject:r' -->
+                                        <li has-permission="'mdm.menu:basedata:subject:r'" class="ng-scope"> <a ui-sref="mdm.subject_index" href="#/mdm/subject_index"><i class="fa fa-flask"></i>学科</a> </li>
+                                        <!-- hasPermission: 'mdm.menu:basedata:version:r' -->
+                                        <li has-permission="'mdm.menu:basedata:version:r'" class="ng-scope"> <a ui-sref="mdm.versionfamily_index" href="#/mdm/versionfamily_index"><i class="fa fa-list-alt"></i>版本族</a> </li>
+                                        <!-- hasPermission: 'mdm.menu:basedata:version:r' -->
+                                        <li has-permission="'mdm.menu:basedata:version:r'" class="ng-scope"> <a ui-sref="mdm.textbookversion_index" href="#/mdm/textbookversion_index"><i class="fa fa-list-alt"></i>教材版本</a> </li>
+                                        <!-- hasPermission: 'mdm.menu:basedata:course:r' -->
+                                        <li has-permission="'mdm.menu:basedata:course:r'" class="ng-scope"> <a ui-sref="mdm.course_index" href="#/mdm/course_index"><i class="fa fa-bookmark"></i>课程</a> </li>
+                                    </ul>
+                                    <!-- /.nav-second-level -->
+                                </li>
+                                <!-- hasPermission: 'mdm.menu:subjectdata:r' -->
+                                <li has-permission="'mdm.menu:subjectdata:r'" class="ng-scope">
+                                    <a href=""><i class="fa fa-book fa-fw"></i> <span class="nav-label">学科数据管理</span><span class="fa arrow"></span></a> <ul class="nav nav-second-level collapse">
+                                        <!-- hasPermission: 'mdm.menu:subjectdata:kpoint:r' -->
+                                        <li has-permission="'mdm.menu:subjectdata:kpoint:r'" class="ng-scope"> <a ui-sref="mdm.kpoint_index" href="#/mdm/kpoint_index"><i class="fa fa-sitemap"></i>知识点</a> </li>
+                                        <!-- hasPermission: 'mdm.menu:subjectdata:textbook:r' -->
+                                        <li has-permission="'mdm.menu:subjectdata:textbook:r'" class="ng-scope"> <a ui-sref="mdm.textbook_index" href="#/mdm/textbook_index"><i class="glyphicon glyphicon-book"></i>教材</a> </li>
+                                        <!-- hasPermission: 'mdm.menu:subjectdata:kpoint:r' -->
+                                        <li has-permission="'mdm.menu:subjectdata:kpoint:r'" class="ng-scope"> <a ui-sref="mdm.xkw_kpoint_mapping_index" href="#/mdm/xkw_kpoint_mapping_index"><i class="fa fa-sitemap"></i>学科网知识点映射</a> </li>
+                                        <!-- hasPermission: 'mdm.menu:subjectdata:textbook:r' -->
+                                        <li has-permission="'mdm.menu:subjectdata:textbook:r'" class="ng-scope"> <a ui-sref="mdm.xkw_catalog_mapping_index" href="#/mdm/xkw_catalog_mapping_index"><i class="glyphicon glyphicon-book"></i>学科网教材目录映射</a> </li>
+                                    </ul>
+                                    <!-- /.nav-second-level -->
+                                </li>
+                                <!-- hasPermission: 'mdm.menu:userdata:r' -->
+                                <!-- hasPermission: 'mdm.menu:system:r' -->
+                                <li has-permission="'mdm.menu:system:r'" class="ng-scope">
+                                    <a href=""><i class="fa fa-gears fa-fw"></i> <span class="nav-label">系统管理</span><span class="fa arrow"></span></a> <ul class="nav nav-second-level collapse">
+                                        <!--<li has-permission="'mdm.menu:system:config'">--> <!--<a ui-sref="mdm.undefined"><i class="fa fa-gear"></i>设置</a>--> <!--</li>--> <!-- hasPermission: 'mdm.menu:system:log' -->
+                                        <li has-permission="'mdm.menu:system:log'" class="ng-scope"> <a ui-sref="mdm.log_index" href="#/mdm/log_index"><i class="fa fa-file-text"></i>日志</a> </li>
+                                        <!-- hasPermission: '*' -->
+                                    </ul> <!-- /.nav-second-level -->
+                                </li>
+                            </ul>
+                        </div> <!-- /.sidebar-collapse -->
+                    </div>
+                </nav> 
+                <!-- /.navbar-top-links --> <!-- /.navbar-static-side --> 
+                <div id="page-wrapper" style="min-height: 417px;"> 
+                    @RenderBody()
+                </div>
+                <!-- /#page-wrapper -->
+            </div>
+        </div>
+    </div>
+
+
     <!-- Custom Theme JavaScript -->
-
     @RenderSection("scripts", false)
-    <script src="/Skins/admin/dist/js/sb-admin-2.js"></script>
-
-
+   
 </body>
 </html>

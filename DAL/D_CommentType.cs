@@ -18,16 +18,16 @@ namespace DAL
         /// <typeparam name="T"></typeparam>
         /// <param name="model"></param>
         /// <returns></returns>
-        public  List<commenttype> GetList() 
+        public  List<E_CommentType> GetList() 
         {
-            List<commenttype> list;
+            List<E_CommentType> list;
        
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select * from commenttype where isdelete=0"); 
 
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
-                list = conn.Query<commenttype>(strSql.ToString())?.ToList();
+                list = conn.Query<E_CommentType>(strSql.ToString())?.ToList();
 
             }
             return list;
@@ -39,7 +39,7 @@ namespace DAL
         /// <typeparam name="T"></typeparam>
         /// <param name="model"></param>
         /// <returns></returns>
-        public commenttype GetInfoById(commenttype model)
+        public E_CommentType GetInfoById(E_CommentType model)
         {
           
 
@@ -48,7 +48,7 @@ namespace DAL
 
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
-                model = conn.Query<commenttype>(strSql.ToString(),model)?.FirstOrDefault();
+                model = conn.Query<E_CommentType>(strSql.ToString(),model)?.FirstOrDefault();
 
             }
             return model;
@@ -58,7 +58,7 @@ namespace DAL
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public  bool Add(commenttype model)
+        public  bool Add(E_CommentType model)
         {
           
 
@@ -85,7 +85,7 @@ namespace DAL
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public  bool Update(commenttype model)
+        public  bool Update(E_CommentType model)
         {
  
             StringBuilder strSql = new StringBuilder();
@@ -109,7 +109,7 @@ namespace DAL
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool DeleteById(commenttype model)
+        public bool DeleteById(E_CommentType model)
         {
 
             StringBuilder strSql = new StringBuilder();

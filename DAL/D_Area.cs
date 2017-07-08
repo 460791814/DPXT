@@ -18,14 +18,14 @@ namespace DAL
         /// <summary>
         /// 查询
         /// </summary>
-        public List<area> GetList()
+        public List<E_Area> GetList()
         {
-            List<area> list;
+            List<E_Area> list;
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select * from area");
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
-                list = conn.Query<area>(strSql.ToString())?.ToList();
+                list = conn.Query<E_Area>(strSql.ToString())?.ToList();
             }
             return list;
         }

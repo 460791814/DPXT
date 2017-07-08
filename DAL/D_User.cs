@@ -18,9 +18,9 @@ namespace DAL
         /// <summary>
         /// 查询
         /// </summary>
-        public List<user> GetList(user model)
+        public List<E_User> GetList(E_User model)
         {
-            List<user> list;
+            List<E_User> list;
             StringBuilder strSql = new StringBuilder();
             strSql.Append(@"select * from
                         (
@@ -30,7 +30,7 @@ namespace DAL
                         ) as T where t.rowid between @pageindex*@pagesize and (@pageindex+1)*@pagesize");
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
-                list = conn.Query<user>(strSql.ToString(), model)?.ToList();
+                list = conn.Query<E_User>(strSql.ToString(), model)?.ToList();
             }
             return list;
         }
@@ -52,13 +52,13 @@ namespace DAL
         /// <summary>
         /// 查询
         /// </summary>
-        public user GetInfoById(user model)
+        public E_User GetInfoById(E_User model)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select * from dp_user where userid=@userid");
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
-                model = conn.Query<user>(strSql.ToString(), model)?.FirstOrDefault();
+                model = conn.Query<E_User>(strSql.ToString(), model)?.FirstOrDefault();
             }
             return model;
         }
@@ -66,7 +66,7 @@ namespace DAL
         /// <summary>
         /// 添加
         /// </summary>
-        public bool Add(user model)
+        public bool Add(E_User model)
         {
             string sql = @"INSERT INTO [comment].[dbo].[dp_user]([realname],[username],[password],[areaid],[classinfoid],[updatetime]) 
                             VALUES (@realname,@username,@password,@areaid,@classinfoid,@updatetime)";
@@ -87,7 +87,7 @@ namespace DAL
         /// <summary>
         /// 更新
         /// </summary>
-        public bool Update(user model)
+        public bool Update(E_User model)
         {
 
             StringBuilder strSql = new StringBuilder();
@@ -117,7 +117,7 @@ namespace DAL
         /// <summary>
         /// 删除
         /// </summary>
-        public bool DeleteById(user model)
+        public bool DeleteById(E_User model)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("DELETE FROM [comment].[dbo].[dp_user] where userid=@userid");
