@@ -23,7 +23,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"> 作业区 </span>
                             <select class="form-control ng-pristine ng-valid ng-empty ng-touched ng-untouched" >
-                                <option value="" class="" selected="selected">请选择学段 </option>
+                                <option value="" class="" selected="selected">请选择作业区 </option>
                                 <option label="小学" value="number:2">小学</option>
                                 <option label="初中" value="number:4">初中</option>
                                 <option label="高中" value="number:8">高中</option>
@@ -34,7 +34,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"> 班组 </span>
                             <select class="form-control ng-pristine ng-valid ng-empty ng-touched ng-untouched" >
-                                <option value="" class="" selected="selected">请选择学段 </option>
+                                <option value="" class="" selected="selected">请选择班组 </option>
                                 <option label="小学" value="number:2">小学</option>
                                 <option label="初中" value="number:4">初中</option>
                                 <option label="高中" value="number:8">高中</option>
@@ -44,14 +44,19 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon">统计日期</span>
-
-                            <div class='input-group date' id='starttime' data-date-format="yyyy-mm-dd">
-                                <input type='text' class="form-control" />
+                            <div class='input-group date inputtime'>
+                                <input type='text' class="form-control" id='starttime' />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                             </div>
-
+                            至
+                            <div class='input-group date inputtime'>
+                                <input type='text' class="form-control" id='endttime' />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -145,7 +150,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#starttime").datetimepicker({
+        $(".inputtime").datetimepicker({
             minView: "month",//设置只显示到月份
             format: "yyyy-mm-dd",//日期格式
             autoclose: true,//选中关闭
