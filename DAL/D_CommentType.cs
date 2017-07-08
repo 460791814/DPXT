@@ -21,10 +21,8 @@ namespace DAL
         public  List<E_CommentType> GetList() 
         {
             List<E_CommentType> list;
-       
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select * from commenttype where isdelete=0"); 
-
+            strSql.Append("select * from dp_commenttype where isdelete=0"); 
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
                 list = conn.Query<E_CommentType>(strSql.ToString())?.ToList();
@@ -41,11 +39,8 @@ namespace DAL
         /// <returns></returns>
         public E_CommentType GetInfoById(E_CommentType model)
         {
-          
-
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select * from commenttype where commenttypeid=@commenttypeid");
-
+            strSql.Append("select * from dp_commenttype where commenttypeid=@commenttypeid");
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
                 model = conn.Query<E_CommentType>(strSql.ToString(),model)?.FirstOrDefault();
@@ -60,13 +55,7 @@ namespace DAL
         /// <returns></returns>
         public  bool Add(E_CommentType model)
         {
-          
-
-
-            string sql = "INSERT INTO [comment].[dbo].[CommentType]([typename]) VALUES (@typename)";
-
-
-
+            string sql = "INSERT INTO dp_commenttype([typename]) VALUES (@typename)";
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
                 int count = conn.Execute(sql, model);
@@ -87,10 +76,8 @@ namespace DAL
         /// <returns></returns>
         public  bool Update(E_CommentType model)
         {
- 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("update CommentType set typename=@typename  where commenttypeid=@commenttypeid ");
-
+            strSql.Append("update dp_commenttype set typename=@typename  where commenttypeid=@commenttypeid ");
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
                 int count = conn.Execute(strSql.ToString(), model);
@@ -111,10 +98,8 @@ namespace DAL
         /// <returns></returns>
         public bool DeleteById(E_CommentType model)
         {
-
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("update CommentType set isdelete=1  where commenttypeid=@commenttypeid ");
-
+            strSql.Append("update dp_commenttype set isdelete=1  where commenttypeid=@commenttypeid ");
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
                 int count = conn.Execute(strSql.ToString(), model);
