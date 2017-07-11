@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "综合平均统计";
     Layout = "~/Views/Share/_LayOut.cshtml";
+    var eStatisticsParameter = ViewBag.eStatisticsParameter == null ? new Model.Statistics.E_StatisticsParameter() : (Model.Statistics.E_StatisticsParameter)ViewBag.eStatisticsParameter;
 }
 
 <link href="/skins/admin/vendor/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
@@ -19,49 +20,52 @@
             <!--操作-->
             <div class="form" style="padding-bottom:10px;">
                 <div class="form-inline">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon"> 作业区 </span>
-                            <select class="form-control ng-pristine ng-valid ng-empty ng-touched ng-untouched" >
-                                <option value="" class="" selected="selected">请选择作业区 </option>
-                                <option label="小学" value="number:2">小学</option>
-                                <option label="初中" value="number:4">初中</option>
-                                <option label="高中" value="number:8">高中</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon"> 班组 </span>
-                            <select class="form-control ng-pristine ng-valid ng-empty ng-touched ng-untouched" >
-                                <option value="" class="" selected="selected">请选择班组 </option>
-                                <option label="小学" value="number:2">小学</option>
-                                <option label="初中" value="number:4">初中</option>
-                                <option label="高中" value="number:8">高中</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon">统计日期</span>
-                            <div class='input-group date inputtime'>
-                                <input type='text' class="form-control" id='starttime' />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                            至
-                            <div class='input-group date inputtime'>
-                                <input type='text' class="form-control" id='endttime' />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
+
+                    <form action="/statistics/totalavg" method="get">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"> 作业区 </span>
+                                <select class="form-control ng-pristine ng-valid ng-empty ng-touched ng-untouched"  id="area" name="areaid" onchange="loadclassinfolist(0)">
+                                    @{
+                                        var arealist = ViewBag.arealist as List<E_Area>;
+                                        foreach (var item in arealist)
+                                        {
+                                            <option value="@item.id" @((item.id == eStatisticsParameter.areaid) ? "selected" : "")>@item.name</option>
+                                        }
+                                    }
+                                </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary" data-toggle="modal" ><i class="fa fa-search"></i>查询 </button>
-                    </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"> 班组 </span>
+                                <select id="classinfo" name="classinfoid" class="form-control ng-pristine ng-valid ng-empty ng-touched ng-untouched"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">统计日期</span>
+                                <div class='input-group date inputtime'>
+                                    <input type='text' class="form-control" id='starttime' name="starttime" value="@eStatisticsParameter.starttime" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                                至
+                                <div class='input-group date inputtime'>
+                                    <input type='text' class="form-control" id='endtime' name="endtime" value="@eStatisticsParameter.endtime" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" name="issearch" value="1" />
+                            <button type="submit" class="btn btn-primary" data-toggle="modal"><i class="fa fa-search"></i>查询 </button>
+                        </div>
+                    </form>
+
                     <div class="form-group pull-right">
                         <button class="btn btn-info" data-toggle="modal" onclick="csvExporter().exportTable('dataTable','组织机构')"><i class="fa fa-cloud-download"></i>导出 </button>
                     </div>
@@ -133,8 +137,8 @@
                                 <td>@item.avgexpect</td>
                                 <td>@item.avgreal</td>
                                 <td>@item.avgdifferent</td>
-                                <td>@item.expectdeviation*100%</td>
-                                <td>@item.satisfaction*100%</td>
+                                <td>@(item.expectdeviation*100)%</td>
+                                <td>@(item.satisfaction*100)%</td>
                             </tr>
                         }
                             }
@@ -157,5 +161,27 @@
             todayBtn: true,//今日按钮
             language: 'cn'
         });
+
+        loadclassinfolist(1);//初始化选择班组
+
     });
+
+    //加载班组
+    function loadclassinfolist(isload) {
+        var areaid = $("#area").val();
+        var data = "areaid=" + areaid;
+        $.post("/WebApi/GetClassInfoList", data, function (data) {
+            if (data) {
+                var classinfohtml = "";
+                var jsondata = eval(data);
+                for (var i = 0; i < jsondata.length; i++) {
+                    classinfohtml += "<option value=" + jsondata[i]["id"] + ">" + jsondata[i]["cname"] + "</option>";
+                }
+                $("#classinfo").html(classinfohtml);
+                if (isload == 1) { //判断是否为首次加载
+                    $("#classinfo").val(@eStatisticsParameter.classinfoid);
+                }
+            }
+        });
+    }
 </script>

@@ -13,16 +13,26 @@ namespace DPXT.Controllers
     /// </summary>
     public class StatisticsController : Controller
     {
+        D_Area dalarea = new D_Area();
+
         // GET: Statistics
         [Route("/statistics/totalavg")]
-        public ActionResult TotalAvg(int? areaid,int? classinfoid,DateTime? starttime,DateTime? endtime)
+        public ActionResult TotalAvg(E_StatisticsParameter eStatisticsParameter)
         {
-            D_Statistics dStatistics = new D_Statistics();
-            List<E_ItemTotal> itemtotallist = dStatistics.GetItemTotal();
-            List<E_ItemTotalAvg> itemtotalavglist = dStatistics.GetItemTotalAvg();
+            List<E_ItemTotal> itemtotallist = new List<E_ItemTotal>();
+            List<E_ItemTotalAvg> itemtotalavglist = new List<E_ItemTotalAvg>();
+            if (eStatisticsParameter.issearch > 0)
+            {
+                D_Statistics dStatistics = new D_Statistics();
+                itemtotallist = dStatistics.GetItemTotal(eStatisticsParameter);
+                itemtotalavglist = dStatistics.GetItemTotalAvg(eStatisticsParameter);
+            }
             ViewBag.itemtotallist = itemtotallist;
             ViewBag.itemtotalavglist = itemtotalavglist;
+            ViewBag.eStatisticsParameter = eStatisticsParameter;
+            ViewBag.arealist = dalarea.GetList();                      //作业区列表
             return View("/views/statistics/TotalAvg.cshtml");
         }
+        
     }
 }

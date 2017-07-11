@@ -16,7 +16,7 @@ namespace Comp
     /// <summary>
     /// 常用工具类(UpdateTime:10.8.1017)
     /// </summary>
-    public sealed class Utils
+    public static class Utils
     {
         #region 缓存设置\获取
         /// <summary>
@@ -1891,6 +1891,24 @@ namespace Comp
             {
                 SoftSize = SoftSize / 1024;
                 return SoftSize + "MB";
+            }
+        }
+
+        /// <summary>
+        /// 添加Where条件
+        /// </summary>
+        /// <param name="strwhere">已有Where条件</param>
+        /// <param name="newwhere">新增Where条件</param>
+        /// <returns></returns>
+        public static void AddWhere(this StringBuilder strwhere,string newwhere)
+        {
+            if (string.IsNullOrEmpty(strwhere.ToString()))
+            {
+                strwhere.Append($" where {newwhere}");
+            }
+            else
+            {
+                strwhere.Append($" and {newwhere}");
             }
         }
     }

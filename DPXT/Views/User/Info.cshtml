@@ -1,7 +1,7 @@
 ﻿@using Model;
 @{
     Layout = null;
-    var info = ViewBag.Info == null ? new Model.user() : (Model.user)ViewBag.Info;
+    var info = ViewBag.Info == null ? new Model.E_User() : (Model.E_User)ViewBag.Info;
 }
 
 <!DOCTYPE html>
@@ -22,7 +22,7 @@
                 <label>作业区：</label>
                 <select class="form-control" id="area" onchange="loadclassinfolist(0)">
                      @{ 
-                         var arealist = ViewBag.arealist as List<area>;
+                         var arealist = ViewBag.arealist as List<E_Area>;
                          foreach (var item in arealist)
                          { 
 
@@ -62,7 +62,7 @@
         {
             var areaid = $("#area").val();
             var data = "areaid=" + areaid;
-            $.post("/User/GetClassInfoList", data, function (data) {
+            $.post("/WebApi/GetClassInfoList", data, function (data) {
                 if (data)
                 {
                     var classinfohtml = "";

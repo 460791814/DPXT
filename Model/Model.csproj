@@ -48,6 +48,7 @@
     <Compile Include="E_User.cs" />
     <Compile Include="Statistics\E_ItemToalAvg.cs" />
     <Compile Include="Statistics\E_ItemTotal.cs" />
+    <Compile Include="Statistics\E_StatisticsParameter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

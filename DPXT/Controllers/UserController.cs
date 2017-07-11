@@ -14,7 +14,6 @@ namespace DPXT.Controllers
     {
         D_User daluser = new D_User();
         D_Area dalarea = new D_Area();
-        D_ClassInfo dalclassinfo = new D_ClassInfo();
 
         /// <summary>
         /// 列表
@@ -33,17 +32,7 @@ namespace DPXT.Controllers
 
             return View();
         }
-
-        /// <summary>
-        /// 获取班组列表
-        /// </summary>
-        public JsonResult GetClassInfoList(int areaid)
-        {
-            E_ClassInfo model = new E_ClassInfo();
-            model.areaid = areaid;
-            return Json(JsonConvert.SerializeObject(dalclassinfo.GetList(model)));
-        }
-
+        
         /// <summary>
         /// 保存
         /// </summary>
