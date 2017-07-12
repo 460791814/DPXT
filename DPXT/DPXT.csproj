@@ -284,13 +284,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CommentItemController.cs" />
     <Compile Include="Controllers\CommentTypeController.cs" />
+    <Compile Include="Controllers\OpinionController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
+    <Compile Include="Controllers\ThemeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WebApiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mousse\DataHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -356,6 +360,12 @@
     <Content Include="Views\User\Info.cshtml" />
     <Content Include="Views\User\List.cshtml" />
     <Content Include="Views\Statistics\TotalAvg.cshtml" />
+    <Content Include="Views\Theme\List.cshtml" />
+    <Content Include="Views\Theme\Info.cshtml" />
+    <Content Include="Views\CommentItem\Info.cshtml" />
+    <Content Include="Views\CommentItem\List.cshtml" />
+    <Content Include="Views\Opinion\Info.cshtml" />
+    <Content Include="Views\Opinion\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

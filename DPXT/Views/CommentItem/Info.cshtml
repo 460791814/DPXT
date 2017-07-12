@@ -1,0 +1,92 @@
+﻿@using Model;
+@{
+
+    Layout = null;
+
+    var info = ViewBag.Info == null ? new E_CommentItem() : (E_CommentItem)ViewBag.Info;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>详情</title>
+    <link href="/Skins/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://aui.github.io/artDialog/lib/jquery-1.10.2.js"></script>
+    <script src="~/Skins/artDialog/dist/dialog.js"></script>
+    <script src="~/Skins/artDialog/dist/dialog-plus.js"></script>
+</head>
+<body>
+    <div>
+        <div role="form">
+            <div class="form-group">
+                <select class="btn btn-default dropdown-toggle" id="selectControl" onchange="redirect()">
+                    @{
+
+                        foreach (var item in DataHelper.GetCommentTypeList())
+                        {
+                            if (info.commenttypeid == item.commenttypeid)
+                            {
+                                <option value="@item.commenttypeid" selected="selected">@item.typename</option>
+                            }
+                            else
+                            {
+                                <option value="@item.commenttypeid">@item.typename</option>
+                            }
+
+                        }
+                    }
+
+                </select>
+            </div>
+            <div class="form-group">
+               
+
+                <label>维度名称：</label>
+                <input class="form-control" id="typename" value="@info.title">
+                <input type="hidden" id="hid" value="@info.commentitemid" />
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="save()">保存</button>
+
+        </div>
+    </div>
+    <script>
+
+        function ok() {
+
+            top.dialog.get('id-info').close()
+        }
+
+    </script>
+
+    <script>
+
+        function save() {
+
+            var typename = $("#typename").val();
+            var hid = $("#hid").val();
+            var data = "title=" + typename + "&commentitemid=" + hid + "&commenttypeid=" + $("#selectControl").val()
+            //ajax
+            $.post("/CommentItem/Save", data, function (data) {
+                if (data == "True") {
+                    top.window.location.reload();
+
+                } else {
+                    //消息
+                    dialog({
+                        title: "失败",
+                        content: '保存失败！'
+                    }).show();
+                }
+            });
+
+            return false;
+
+        }
+
+    </script>
+
+</body>
+</html>

@@ -41,6 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="E_Opinion.cs" />
+    <Compile Include="E_CommentItem.cs" />
+    <Compile Include="E_OpinionType.cs" />
+    <Compile Include="E_Theme.cs" />
+    <Compile Include="dp_themecommentitem.cs" />
+    <Compile Include="dp_themeopinion.cs" />
     <Compile Include="E_Area.cs" />
     <Compile Include="E_ClassInfo.cs" />
     <Compile Include="E_CommentType.cs" />

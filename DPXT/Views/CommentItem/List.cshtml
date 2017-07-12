@@ -1,0 +1,128 @@
+﻿@using Model;
+@{
+
+    ViewBag.Title = "";
+    Layout = "~/Views/Share/_LayOut.cshtml";
+}
+<script src="~/Skins/artDialog/dist/dialog.js"></script>
+<script src="~/Skins/artDialog/dist/dialog-plus.js"></script>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                点评项列表
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="row form-inline">
+                    <div class="form-group" style="margin:0 0 15px 15px">
+                        <select class="form-control" id="selectControl"  onchange="redirect()">
+                            @{
+                                <option value="0" selected="selected">全部</option>
+                                foreach (var item in DataHelper.GetCommentTypeList())
+                                {
+
+                                    if (Request["commenttypeid"] == item.commenttypeid.ToString())
+                                    {
+                                        <option value="@item.commenttypeid" selected="selected">@item.typename</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.commenttypeid">@item.typename</option>
+                                    }
+                                }
+                            }
+                            
+                        </select>
+                        <script>
+                            function redirect() {
+                                window.location.href = "/CommentItem/List?commenttypeid=" + $("#selectControl").val();
+                            }
+                        
+                        </script>
+                        <button type="button" class="btn btn-primary" onclick="update(0)">添加</button>
+
+                    </div>
+                </div>
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>点评项</th>
+                            <th>点评维度</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var list = ViewBag.list as List<E_CommentItem>;
+                            foreach (var item in list)
+                            {
+                                <tr>
+                                    <td>@item.commentitemid</td>
+
+                                    <td>@item.title</td>
+                                    <td>@DataHelper.GetCommentTypeName(item.commenttypeid)</td>
+                                    <td><a href="javascript:void(0)" onclick="update(@item.commentitemid)">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="del(@item.commentitemid)">删除</a></td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+                <!-- /.table-responsive -->
+                <div class="row">
+                    <div style="text-align: center">
+                        @Html.Raw(ViewBag.page)
+                    </div>
+
+                </div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+
+
+<script>
+
+    function del(id)
+    {
+        if (!confirm("确认删除？")) {
+            return false;
+        }
+
+        var data = "commentitemid=" + id
+        //ajax
+        $.post("/CommentItem/Delete", data, function (data) {
+            if (data == "True") {
+                window.location.reload();
+
+            } else {
+                //消息
+                dialog({
+                    title: "失败",
+                    content: '删除失败！'
+                }).show();
+            }
+        });
+
+        return false;
+
+
+    }
+    function update(id) {
+        var d = dialog({
+            title: '编辑',
+            url: '/CommentItem/Info?id=' + id,
+            id: 'id-info',
+
+        });
+        d.showModal();
+    }
+
+</script>

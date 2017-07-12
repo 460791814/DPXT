@@ -1,8 +1,8 @@
 ﻿@{
-   
+
     Layout = null;
 
-    var info = ViewBag.Info == null ? new Model.E_CommentType() : (Model.E_CommentType)ViewBag.Info;
+    var info = ViewBag.Info == null ? new Model.E_Theme() : (Model.E_Theme)ViewBag.Info;
 }
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>点评详情</title>
+    <title>详情</title>
     <link href="/Skins/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://aui.github.io/artDialog/lib/jquery-1.10.2.js"></script>
     <script src="~/Skins/artDialog/dist/dialog.js"></script>
@@ -21,8 +21,8 @@
         <div role="form">
             <div class="form-group">
                 <label>维度名称：</label>
-                <input class="form-control" id="typename" value="@info.typename">
-                <input type="hidden" id="hid" value="@info.commenttypeid" />
+                <input class="form-control" id="typename" value="@info.themename">
+                <input type="hidden" id="hid" value="@info.themeid" />
             </div>
 
             <button type="button" class="btn btn-primary" onclick="save()">保存</button>
@@ -44,9 +44,9 @@
 
             var typename = $("#typename").val();
             var commenttypeid = $("#hid").val();
-            var data = "typename=" + typename + "&commenttypeid=" + commenttypeid
+            var data = "themename=" + typename + "&themeid=" + commenttypeid
             //ajax
-            $.post("/CommentType/Save", data, function (data) {
+            $.post("/Theme/Save", data, function (data) {
                 if (data == "True") {
                     top.window.location.reload();
 
