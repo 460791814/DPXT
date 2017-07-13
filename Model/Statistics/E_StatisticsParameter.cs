@@ -35,5 +35,25 @@ namespace Model.Statistics
         /// 结束时间
         /// </summary>
         public DateTime? endtime { get; set; }
+
+        /// <summary>
+        /// 性别
+        /// </summary>
+        public int sex { get; set; }
+
+        /// <summary>
+        /// 年龄
+        /// </summary>
+        public int ageround { get; set; }
+
+        /// <summary>
+        /// 区域
+        /// </summary>
+        public int domain { get; set; }
+
+        /// <summary>
+        /// 人员类型
+        /// </summary>
+        public int job { get; set; }
     }
 }
