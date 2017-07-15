@@ -18,6 +18,7 @@ namespace DPXT.Controllers
         /// <summary>
         /// 列表
         /// </summary>
+        [AuthAttribute]
         public ActionResult List()
         {
             int pageIndex = Utils.GetInt(Request["page"]);

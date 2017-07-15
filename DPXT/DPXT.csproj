@@ -241,6 +241,7 @@
     <Content Include="Skins\css\huiyuan.css" />
     <Content Include="Skins\css\layout.css" />
     <Content Include="Skins\css\login.css" />
+    <Content Include="Skins\css\main.css" />
     <Content Include="Skins\css\style.css" />
     <Content Include="Skins\images\a1.jpg" />
     <Content Include="Skins\images\a2.jpg" />
@@ -277,22 +278,67 @@
     <Content Include="Skins\images\yjt.png" />
     <Content Include="Skins\images\yp.png" />
     <Content Include="Skins\images\zjt.png" />
+    <Content Include="Skins\UploadFile\angularjs.html" />
+    <Content Include="Skins\UploadFile\basic-plus.html" />
+    <Content Include="Skins\UploadFile\basic.html" />
+    <Content Include="Skins\UploadFile\cors\postmessage.html" />
+    <Content Include="Skins\UploadFile\cors\result.html" />
+    <Content Include="Skins\UploadFile\css\demo-ie8.css" />
+    <Content Include="Skins\UploadFile\css\demo.css" />
+    <Content Include="Skins\UploadFile\css\jquery.fileupload-ui-noscript.css" />
+    <Content Include="Skins\UploadFile\css\jquery.fileupload-ui.css" />
+    <Content Include="Skins\UploadFile\css\style.css" />
+    <Content Include="Skins\UploadFile\img\loading.gif" />
+    <Content Include="Skins\UploadFile\img\progressbar.gif" />
+    <Content Include="Skins\UploadFile\index.html" />
+    <Content Include="Skins\UploadFile\jquery-ui.html" />
+    <Content Include="Skins\UploadFile\js\app.js" />
+    <Content Include="Skins\UploadFile\js\cors\jquery.postmessage-transport.js" />
+    <Content Include="Skins\UploadFile\js\cors\jquery.xdr-transport.js" />
+    <Content Include="Skins\UploadFile\js\jquery.fileupload-angular.js" />
+    <Content Include="Skins\UploadFile\js\jquery.fileupload-audio.js" />
+    <Content Include="Skins\UploadFile\js\jquery.fileupload-image.js" />
+    <Content Include="Skins\UploadFile\js\jquery.fileupload-jquery-ui.js" />
+    <Content Include="Skins\UploadFile\js\jquery.fileupload-process.js" />
+    <Content Include="Skins\UploadFile\js\jquery.fileupload-ui.js" />
+    <Content Include="Skins\UploadFile\js\jquery.fileupload-validate.js" />
+    <Content Include="Skins\UploadFile\js\jquery.fileupload-video.js" />
+    <Content Include="Skins\UploadFile\js\jquery.fileupload.js" />
+    <Content Include="Skins\UploadFile\js\jquery.iframe-transport.js" />
+    <Content Include="Skins\UploadFile\js\main.js" />
+    <Content Include="Skins\UploadFile\js\vendor\jquery.ui.widget.js" />
+    <Content Include="Skins\UploadFile\server\gae-go\static\favicon.ico" />
+    <Content Include="Skins\UploadFile\server\gae-go\static\robots.txt" />
+    <Content Include="Skins\UploadFile\server\gae-python\static\favicon.ico" />
+    <Content Include="Skins\UploadFile\server\gae-python\static\robots.txt" />
+    <Content Include="Skins\UploadFile\server\node\server.js" />
+    <Content Include="Skins\UploadFile\server\php\index.php" />
+    <Content Include="Skins\UploadFile\server\php\UploadHandler.php" />
+    <Content Include="Skins\UploadFile\test\index.html" />
+    <Content Include="Skins\UploadFile\test\test.js" />
     <Content Include="Skins\js\jquery-1.8.3.min.js" />
     <Content Include="Skins\js\jquery.min.js" />
     <Content Include="Skins\js\jquery.SuperSlide.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AuthAttribute.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CommentItemController.cs" />
     <Compile Include="Controllers\CommentTypeController.cs" />
+    <Compile Include="Controllers\FoodController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OpinionController.cs" />
+    <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\ThemeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WebApiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\UploadHandler.ashx.cs">
+      <DependentUpon>UploadHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Mousse\DataHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -366,6 +412,28 @@
     <Content Include="Views\CommentItem\List.cshtml" />
     <Content Include="Views\Opinion\Info.cshtml" />
     <Content Include="Views\Opinion\List.cshtml" />
+    <Content Include="Views\Person\Info.cshtml" />
+    <Content Include="Views\Person\List.cshtml" />
+    <Content Include="Views\Food\Info.cshtml" />
+    <Content Include="Views\Food\List.cshtml" />
+    <Content Include="Skins\UploadFile\.gitignore" />
+    <Content Include="Skins\UploadFile\blueimp-file-upload.jquery.json" />
+    <Content Include="Skins\UploadFile\bower.json" />
+    <Content Include="Skins\UploadFile\CONTRIBUTING.md" />
+    <Content Include="Skins\UploadFile\package.json" />
+    <Content Include="Skins\UploadFile\README.md" />
+    <Content Include="Skins\UploadFile\server\gae-go\app.yaml" />
+    <Content Include="Skins\UploadFile\server\gae-go\app\main.go" />
+    <Content Include="Skins\UploadFile\server\gae-python\app.yaml" />
+    <Content Include="Skins\UploadFile\server\gae-python\main.py" />
+    <Content Include="Skins\UploadFile\server\node\.gitignore" />
+    <Content Include="Skins\UploadFile\server\node\package.json" />
+    <Content Include="Skins\UploadFile\server\node\public\files\.gitignore" />
+    <Content Include="Skins\UploadFile\server\node\tmp\.gitignore" />
+    <Content Include="Skins\UploadFile\server\php\files\.gitignore" />
+    <Content Include="Skins\UploadFile\server\php\files\.htaccess" />
+    <Content Include="Handler\UploadHandler.ashx" />
+    <Content Include="Views\Login\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -376,6 +444,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Upload\" />
     <Folder Include="Views\WebApi\" />
   </ItemGroup>
   <ItemGroup>

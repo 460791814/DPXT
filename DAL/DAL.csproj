@@ -50,7 +50,9 @@
     <Compile Include="D_ClassInfo.cs" />
     <Compile Include="D_CommentItem.cs" />
     <Compile Include="D_CommentType.cs" />
+    <Compile Include="D_Food.cs" />
     <Compile Include="D_Opinion.cs" />
+    <Compile Include="D_Person.cs" />
     <Compile Include="D_Statistics.cs" />
     <Compile Include="D_Theme.cs" />
     <Compile Include="D_User.cs" />

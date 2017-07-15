@@ -1,5 +1,6 @@
 ﻿using Comp;
 using DAL;
+
 using Model;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace DPXT.Controllers
         /// </summary>
         /// <returns></returns>
         // GET: CommentType
+      [AuthAttribute]
         public ActionResult List()
         {
             int pageIndex = Utils.GetInt(Request["page"]);

@@ -64,6 +64,19 @@ namespace DAL
         }
 
         /// <summary>
+        /// 查询
+        /// </summary>
+        public E_User GetInfoByName(E_User model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select * from dp_user where username=@username");
+            using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
+            {
+                model = conn.Query<E_User>(strSql.ToString(), model)?.FirstOrDefault();
+            }
+            return model;
+        }
+        /// <summary>
         /// 添加
         /// </summary>
         public bool Add(E_User model)

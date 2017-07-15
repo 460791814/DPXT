@@ -5,8 +5,8 @@ namespace Model
 	/// 意见表
 	/// </summary>
 	[Serializable]
-	public partial class E_Opinion
-	{
+	public partial class E_Opinion : BaseModel
+    {
 	
 		#region Model
 		private int _opinionid;

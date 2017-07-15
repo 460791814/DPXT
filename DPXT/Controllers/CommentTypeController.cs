@@ -17,7 +17,7 @@ namespace DPXT.Controllers
         /// 列表
         /// </summary>
         /// <returns></returns>
-        // GET: CommentType
+        [AuthAttribute]
         public ActionResult List()
         {
             int pageIndex = Utils.GetInt(Request["page"]);

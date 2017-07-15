@@ -22,7 +22,10 @@ namespace DAL
         {
             List<E_ClassInfo> list;
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select * from classinfo where areaid=@areaid");
+            strSql.Append("select * from classinfo where 1=1");
+            if (model.areaid > 0) {
+                strSql.Append(" and areaid=@areaid ");
+            }
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
                 list = conn.Query<E_ClassInfo>(strSql.ToString(), model)?.ToList();

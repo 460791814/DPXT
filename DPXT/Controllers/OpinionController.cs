@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using Comp;
+using DAL;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -16,12 +17,14 @@ namespace DPXT.Controllers
         /// </summary>
         /// <returns></returns>
         // GET: CommentType
+        [AuthAttribute]
         public ActionResult List(E_Opinion model)
         {
-
-
-            ViewBag.list = dal.GetList(model);
-
+    
+            model.PageIndex = Utils.GetInt(Request["page"]);
+            int count = 0;
+            ViewBag.list = dal.GetList(model,ref count);
+            ViewBag.page = Utils.ShowPage(count, model.PageSize, model.PageIndex, 5);
             return View();
         }
         /// <summary>

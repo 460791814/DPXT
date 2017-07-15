@@ -1,0 +1,120 @@
+﻿@using Model;
+@{
+
+    Layout = null;
+
+    var info = ViewBag.Info == null ? new E_Person() : (E_Person)ViewBag.Info;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>详情</title>
+    <link href="/Skins/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://aui.github.io/artDialog/lib/jquery-1.10.2.js"></script>
+    <script src="~/Skins/artDialog/dist/dialog.js"></script>
+    <script src="~/Skins/artDialog/dist/dialog-plus.js"></script>
+</head>
+<body>
+    <div>
+        <div role="form">
+ 
+            <div class="form-group">
+                <label>作业区：</label>
+                <select class="form-control" id="area" onchange="loadclassinfolist(0)">
+                    @{
+                        var arealist = DataHelper.GetAreaList();
+                        foreach (var item in arealist)
+                        {
+
+                            <option value="@item.id" @((item.id == info.areaid) ? "selected" : "")>@item.name</option>
+                        }
+                    }
+                </select>
+                <label>班组：</label>
+                <select class="form-control" id="classinfo"></select>
+
+                <label>人员名称：</label>
+                <input class="form-control" id="personname" value="@info.personname">
+                <label>岗位：</label>
+                <select id="jobtype" class="form-control ng-pristine ng-valid ng-empty ng-touched">
+                    @{
+                        var joblist = DataHelper.GetJobTypeList();
+                        foreach (var item in joblist)
+                        {
+
+                            <option value="@item.Key" @((item.Key == info.jobtypeid) ? "selected" : "")>@item.Value</option>
+                        }
+                    }
+                </select>
+                <input type="hidden" id="hid" value="@info.personid" />
+                <input type="hidden" id="classinfoid" value="@info.classinfoid" />
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="save()">保存</button>
+
+        </div>
+    </div>
+    <script>
+
+        function ok() {
+
+            top.dialog.get('id-info').close()
+        }
+
+    </script>
+
+    <script>
+
+        function save() {
+
+            var personname = $("#personname").val();
+            var hid = $("#hid").val();
+            var areaid = $("#area").val();
+            var classinfoid = $("#classinfo").val();
+            var data = "personname=" + personname + "&personid=" + hid + "&jobtypeid=" + $("#jobtype").val()+ "&areaid=" + areaid + "&classinfoid=" + classinfoid 
+            //ajax
+            $.post("/Person/Save", data, function (data) {
+                if (data == "True") {
+                    top.window.location.reload();
+
+                } else {
+                    //消息
+                    dialog({
+                        title: "失败",
+                        content: '保存失败！'
+                    }).show();
+                }
+            });
+
+            return false;
+
+        }
+        //加载班组
+        function loadclassinfolist(isload) {
+            var areaid = $("#area").val();
+            var data = "areaid=" + areaid;
+            $.post("/WebApi/GetClassInfoList", data, function (data) {
+                if (data) {
+                    var classinfohtml = "";
+                    var jsondata = eval(data);
+                    for (var i = 0; i < jsondata.length; i++) {
+                        classinfohtml += "<option value=" + jsondata[i]["id"] + ">" + jsondata[i]["cname"] + "</option>";
+                    }
+                    $("#classinfo").html(classinfohtml);
+                    if (isload == 1) { //判断是否为首次加载
+                        $("#classinfo").val($("#classinfoid").val());
+                    }
+                }
+            });
+        }
+        //页面初始化内容
+        $(document).ready(function () {
+            loadclassinfolist(1);//初始化选择班组
+        });
+    </script>
+
+</body>
+</html>

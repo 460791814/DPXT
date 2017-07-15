@@ -16,7 +16,7 @@ namespace DPXT.Controllers
         /// 列表
         /// </summary>
         /// <returns></returns>
-        // GET: CommentType
+        [AuthAttribute]
         public ActionResult List(E_CommentItem model)
         {
            

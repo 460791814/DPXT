@@ -1911,5 +1911,53 @@ namespace Comp
                 strwhere.Append($" and {newwhere}");
             }
         }
+
+        #region cookies
+        /// <summary>
+        /// 写入COOKIES
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <param name="value"></param>
+        /// <param name="expires"></param>
+        /// <param name="domain"></param>
+        public static void AddCookies(String keyName,String value, DateTime? expires=null,string domain = null)
+        {
+            if (expires == null) {
+                expires = DateTime.Now.AddDays(1);
+            }
+           
+            HttpCookie cookie = new HttpCookie(keyName, value);
+            cookie.Expires = expires.Value;
+            if (!string.IsNullOrWhiteSpace(domain))
+            {
+                cookie.Domain = domain;
+            }
+           
+ 
+            HttpContext.Current.Response.Cookies.Add(cookie);
+        }
+        public static void ClearCookies(String keyName)
+        {
+         
+
+            HttpCookie cookie = new HttpCookie(keyName);
+            cookie.Expires = DateTime.Now.AddDays(-1);
+            
+
+
+            HttpContext.Current.Response.Cookies.Add(cookie);
+        }
+        /// <summary>
+        /// 获取cookis
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <returns></returns>
+        public static String GetCookies(String keyName) {
+            if (HttpContext.Current.Request.Cookies[keyName] != null) {
+                return HttpContext.Current.Request.Cookies[keyName].Value;
+            }
+            return null;
+        }
+        #endregion
     }
 }

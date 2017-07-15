@@ -10,6 +10,8 @@ namespace DPXT
     public class DataHelper
     {
        static  D_CommentType dCommentType = new D_CommentType();
+        static D_Area dalArea = new D_Area();
+        static D_ClassInfo dalclassinfo = new D_ClassInfo();
         public static List<E_CommentType> GetCommentTypeList()
         {
           return  dCommentType.GetList();
@@ -38,5 +40,27 @@ namespace DPXT
             return GetOpinionTypeList().Find(a => a.OpinionTypeId == id).OpinionName;
         }
 
+        public static Dictionary<int,String> GetJobTypeList()
+        {
+            Dictionary<int, String> dic = new Dictionary<int, string>();
+            dic.Add(1, "厨师");
+            dic.Add(2, "打餐");
+            dic.Add(3, "保洁");
+            return dic;
+        }
+
+        public static String GetJobTypeName(int id) {
+            return GetJobTypeList()[id];
+        }
+        public static List<E_ClassInfo> GetClassInfoList()
+        {
+            return dalclassinfo.GetList(new E_ClassInfo());
+        }
+        public static String GetClassInfoName(int? id) {
+            return GetClassInfoList().Find(a => a.id == id)?.cname;
+        }
+        public static List<E_Area> GetAreaList() {
+            return dalArea.GetList();
+        }
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 
+
 namespace DAL
 {
    public class D_Opinion
@@ -18,25 +19,33 @@ namespace DAL
         /// <typeparam name="T"></typeparam>
         /// <param name="model"></param>
         /// <returns></returns>
-        public List<E_Opinion> GetList(E_Opinion model)
+        public List<E_Opinion> GetList(E_Opinion model, ref int total)
         {
+            if (model.PageIndex <= 0) { model.PageIndex = 1; }
+         
+
             List<E_Opinion> list;
             StringBuilder strSql = new StringBuilder();
             StringBuilder whereSql = new StringBuilder(" where isdelete=0 ");
-            strSql.Append("select * from dp_opinion ");
+            strSql.Append(" select  ROW_NUMBER() OVER ( ORDER BY opinionid desc) AS RID, * from dp_opinion ");
             if (model.opiniontypeid > 0)
             {
                 whereSql.Append(" and opiniontypeid=@opiniontypeid");
             }
             strSql.Append(whereSql);
+            string CountSql = "SELECT COUNT(1) as RowsCount FROM (" + strSql.ToString() + ") AS CountList";
+  
+ 
+            string pageSqlStr = "select * from ( " + strSql.ToString() + " ) as Temp_PageData where Temp_PageData.RID BETWEEN {0} AND {1}";
+            pageSqlStr = string.Format(pageSqlStr, (model.PageSize * (model.PageIndex - 1) + 1).ToString(), (model.PageSize * model.PageIndex).ToString());
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
-                list = conn.Query<E_Opinion>(strSql.ToString(), model)?.ToList();
-
+                list = conn.Query<E_Opinion>(pageSqlStr, model)?.ToList();
+                total = conn.ExecuteScalar<int>(CountSql, model);
             }
             return list;
         }
-
+       
         /// <summary>
         /// 查询
         /// </summary>

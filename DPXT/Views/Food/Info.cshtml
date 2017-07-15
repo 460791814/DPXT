@@ -1,0 +1,151 @@
+﻿@using Model;
+@{
+
+    Layout = null;
+
+    var info = ViewBag.Info == null ? new E_Food() : (E_Food)ViewBag.Info;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>详情</title>
+    <link href="/Skins/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://aui.github.io/artDialog/lib/jquery-1.10.2.js"></script>
+    <script src="~/Skins/artDialog/dist/dialog.js"></script>
+    <script src="~/Skins/artDialog/dist/dialog-plus.js"></script>
+
+    <link href="~/Skins/UploadFile/css/jquery.fileupload-ui.css" rel="stylesheet" />
+    <script src="~/Skins/UploadFile/js/vendor/jquery.ui.widget.js"></script>
+    <script src="~/Skins/UploadFile/js/jquery.iframe-transport.js"></script>
+    <script src="~/Skins/UploadFile/js/jquery.fileupload.js"></script>
+    <script type="text/javascript">
+
+
+
+        $(function () {
+
+            $(function () {
+
+                $('#fileupload').fileupload({
+                  
+                    done: function (e, data) {
+                   
+                        $("#img").attr("src", "/upimg/" + data.result);
+                        $("#pic").val(data.result);
+                      //  $("#showImg").show();
+                    }
+                  
+                });
+            });
+        });
+       
+    </script>
+</head>
+<body>
+    <div>
+        <div role="form">
+ 
+            <div class="form-group">
+                <label>菜品名称：</label>
+                <input class="form-control" id="foodname" value="@info.foodname">
+                <label>厨师名称：</label>
+                <input class="form-control" id="cookname" value="@info.cookname">
+
+                <label>作业区：</label>
+                <select class="form-control" id="area" onchange="loadclassinfolist(0)">
+                    @{
+                        var arealist = DataHelper.GetAreaList();
+                        foreach (var item in arealist)
+                        {
+
+                            <option value="@item.id" @((item.id == info.areaid) ? "selected" : "")>@item.name</option>
+                        }
+                    }
+                </select>
+                <label>班组：</label>
+                <select class="form-control" id="classinfo"></select>
+                <label>上传图片：</label>
+                
+                <div>
+                    <span class="btn btn-success fileinput-button">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        <span>选择文件...</span>
+                        <input id="fileupload" type="file" name="files" data-url="/Handler/UploadHandler.ashx" multiple="">
+                    </span>
+                    <div>
+                      <img  id="img" width="300px" height="200px" src="/upimg/@info.pic"/>
+                    </div>
+                </div> 
+                <input type="hidden" id="hid" value="@info.foodid" />
+                <input type="hidden" id="classinfoid" value="@info.classinfoid" />
+                <input type="hidden" id="pic" value="@info.pic" />
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="save()">保存</button>
+
+        </div>
+    </div>
+    <script>
+
+        function ok() {
+
+            top.dialog.get('id-info').close()
+        }
+
+    </script>
+
+    <script>
+
+        function save() {
+
+            var foodname = $("#foodname").val();
+            var hid = $("#hid").val();
+            var areaid = $("#area").val();
+            var classinfoid = $("#classinfo").val();
+            var data = "foodname=" + foodname + "&foodid=" + hid + "&cookname=" + $("#cookname").val() + "&areaid=" + areaid + "&classinfoid=" + classinfoid + "&pic=" + $("#pic").val()
+            //ajax
+            $.post("/Food/Save", data, function (data) {
+                if (data == "True") {
+                    top.window.location.reload();
+
+                } else {
+                    //消息
+                    dialog({
+                        title: "失败",
+                        content: '保存失败！'
+                    }).show();
+                }
+            });
+
+            return false;
+
+        }
+        //加载班组
+        function loadclassinfolist(isload) {
+            var areaid = $("#area").val();
+            var data = "areaid=" + areaid;
+            $.post("/WebApi/GetClassInfoList", data, function (data) {
+                if (data) {
+                    var classinfohtml = "";
+                    var jsondata = eval(data);
+                    for (var i = 0; i < jsondata.length; i++) {
+                        classinfohtml += "<option value=" + jsondata[i]["id"] + ">" + jsondata[i]["cname"] + "</option>";
+                    }
+                    $("#classinfo").html(classinfohtml);
+                    if (isload == 1) { //判断是否为首次加载
+                        $("#classinfo").val($("#classinfoid").val());
+                    }
+                }
+            });
+        }
+        //页面初始化内容
+        $(document).ready(function () {
+            loadclassinfolist(1);//初始化选择班组
+        });
+    </script>
+
+</body>
+</html>
