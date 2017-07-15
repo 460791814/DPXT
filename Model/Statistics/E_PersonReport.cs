@@ -7,53 +7,58 @@ using System.Threading.Tasks;
 namespace Model.Statistics
 {
     /// <summary>
-    /// 统计查询参数实体
+    /// 员工统计 报表
     /// </summary>
-    public class E_StatisticsParameter
+    public class E_PersonReport
     {
         /// <summary>
-        /// 是否查询
+        /// 员工ID
         /// </summary>
-        public int issearch { get; set; }
+        public int personid { get; set; }
 
         /// <summary>
         /// 作业区ID
         /// </summary>
         public int areaid { get; set; }
-        
+
         /// <summary>
         /// 班组ID
         /// </summary>
         public int classinfoid { get; set; }
 
         /// <summary>
-        /// 开始时间
+        /// 员工名册
         /// </summary>
-        public DateTime? starttime { get; set; }
+        public string personname { get; set; }
 
         /// <summary>
-        /// 结束时间
+        /// 工作岗位
         /// </summary>
-        public DateTime? endtime { get; set; }
+        public int jobtypeid { get; set; }
 
         /// <summary>
-        /// 性别
+        /// 优秀
         /// </summary>
-        public int sex { get; set; }
+        public int perfect { get; set; }
 
         /// <summary>
-        /// 年龄
+        /// 一般
         /// </summary>
-        public int ageround { get; set; }
+        public int good { get; set; }
 
         /// <summary>
-        /// 区域
+        /// 差的
         /// </summary>
-        public int domain { get; set; }
+        public int bad { get; set; }
 
         /// <summary>
-        /// 人员类型
+        /// 好评率
         /// </summary>
-        public int job { get; set; }
+        public float perfectrate { get; set; }
+
+        /// <summary>
+        /// 差评率
+        /// </summary>
+        public float badrate { get; set; }
     }
 }
