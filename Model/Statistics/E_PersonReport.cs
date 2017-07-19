@@ -27,6 +27,11 @@ namespace Model.Statistics
         public int classinfoid { get; set; }
 
         /// <summary>
+        /// 班组名称
+        /// </summary>
+        public string classname { get; set; }
+
+        /// <summary>
         /// 员工名册
         /// </summary>
         public string personname { get; set; }

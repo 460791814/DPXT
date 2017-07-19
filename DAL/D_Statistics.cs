@@ -218,11 +218,11 @@ namespace DAL
             StringBuilder strwhere = new StringBuilder();
             if (eStatisticsParameter.areaid > 0)
             {
-                strwhere.AddWhere($"D.areaid={eStatisticsParameter.areaid}");
+                strwhere.AddWhere($"A.areaid={eStatisticsParameter.areaid}");
             }
             if (eStatisticsParameter.classinfoid > 0)
             {
-                strwhere.AddWhere($"D.classinfoid={eStatisticsParameter.classinfoid}");
+                strwhere.AddWhere($"A.classinfoid={eStatisticsParameter.classinfoid}");
             }
 
             StringBuilder strSql = new StringBuilder();
@@ -232,7 +232,8 @@ namespace DAL
                                     case when total>0 then cast(cast(bad as float)/cast(total as float) as decimal(18,2)) else 0 end as badrate			--差评率
                                     from
                                     (
-	                                    select  *,(perfect+good+bad) as total from dp_person {0}
+	                                    select  A.*,(perfect+good+bad) as total,B.CName as classname from dp_person as A
+	                                    left join ClassInfo as B on A.classinfoid=B.id {0}
                                     ) as T", strwhere.ToString());
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {

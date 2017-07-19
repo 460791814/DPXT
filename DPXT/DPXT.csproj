@@ -434,6 +434,11 @@
     <Content Include="Skins\UploadFile\server\php\files\.htaccess" />
     <Content Include="Handler\UploadHandler.ashx" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Statistics\Sex.cshtml" />
+    <Content Include="Views\Statistics\Ageround.cshtml" />
+    <Content Include="Views\Statistics\Domain.cshtml" />
+    <Content Include="Views\Statistics\Job.cshtml" />
+    <Content Include="Views\Statistics\Person.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
