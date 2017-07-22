@@ -6,6 +6,8 @@
     var eStatisticsParameter = ViewBag.eStatisticsParameter == null ? new Model.Statistics.E_StatisticsParameter() : (Model.Statistics.E_StatisticsParameter)ViewBag.eStatisticsParameter;
 }
 
+<script src="/skins/js/HtmlTableToExecl.js"></script>
+
 <!-- /.row -->
 <div class="ng-scope">
     <div class="row ng-scope">
@@ -45,7 +47,7 @@
                         </div>
 
                         <div class="form-group pull-right">
-                            <button class="btn btn-info" data-toggle="modal" onclick="csvExporter().exportTable('dataTable','组织机构')"><i class="fa fa-cloud-download"></i>导出 </button>
+                            <a class="btn btn-info" onclick="exportTable()"><i class="fa fa-cloud-download"></i>导出 </a>
                         </div>
 
                     </form>
@@ -59,7 +61,7 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    <table class="table table-striped table-bordered table-hover">
+                    <table id="tab_1" class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>序号</th>
@@ -120,6 +122,27 @@
                 if (isload == 1) { //判断是否为首次加载
                     $("#classinfo").val(@eStatisticsParameter.classinfoid);
                 }
+            }
+        });
+    }
+
+    //Execl导出
+    function exportTable() {
+        //获取对应tr集合
+        var trRowCount = 0;
+        var HtmlTableJson = "";
+        HtmlTableJson += "[";
+        HtmlTableJson += GetTrJson("tab_1", trRowCount);
+        HtmlTableJson += "]";
+
+        //生成Execl，并返回对应链接
+        var data = "filename=员工点评&trjson=" + HtmlTableJson;
+        $.post("/WebApi/ExportTable", data, function (data) {
+            if (data.indexOf("NO") > -1) {
+                alert(data);
+            }
+            else {
+                window.location.href = data;
             }
         });
     }

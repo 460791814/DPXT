@@ -278,6 +278,7 @@
     <Content Include="Skins\images\yjt.png" />
     <Content Include="Skins\images\yp.png" />
     <Content Include="Skins\images\zjt.png" />
+    <Content Include="Skins\js\HtmlTableToExecl.js" />
     <Content Include="Skins\UploadFile\angularjs.html" />
     <Content Include="Skins\UploadFile\basic-plus.html" />
     <Content Include="Skins\UploadFile\basic.html" />
@@ -439,6 +440,16 @@
     <Content Include="Views\Statistics\Domain.cshtml" />
     <Content Include="Views\Statistics\Job.cshtml" />
     <Content Include="Views\Statistics\Person.cshtml" />
+    <Content Include="upfile\员工点评201707222318.xls" />
+    <Content Include="upfile\工作性质口径201707222304.xls" />
+    <Content Include="upfile\年龄口径统计201707220252.xls" />
+    <Content Include="upfile\年龄口径统计201707221149.xls" />
+    <Content Include="upfile\年龄口径统计201707221301.xls" />
+    <Content Include="upfile\年龄口径统计201707221337.xls" />
+    <Content Include="upfile\年龄口径统计201707222229.xls" />
+    <Content Include="upfile\性别口径201707222208.xls" />
+    <Content Include="upfile\综合平均201707222129.xls" />
+    <Content Include="upfile\饮食习惯口径201707222244.xls" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
