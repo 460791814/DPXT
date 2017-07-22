@@ -202,7 +202,6 @@
     <Content Include="Skins\artDialog\css\dialog.css" />
     <Content Include="Skins\artDialog\dist\dialog-plus.js" />
     <Content Include="Skins\artDialog\dist\dialog.js" />
-    <Content Include="Skins\artDialog\doc\build\index.js" />
     <Content Include="Skins\artDialog\doc\css\doc.css" />
     <Content Include="Skins\artDialog\doc\index.html" />
     <Content Include="Skins\artDialog\doc\js\doc.js" />
@@ -450,6 +449,7 @@
     <Content Include="upfile\性别口径201707222208.xls" />
     <Content Include="upfile\综合平均201707222129.xls" />
     <Content Include="upfile\饮食习惯口径201707222244.xls" />
+    <None Include="Properties\PublishProfiles\zyj_config.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -460,6 +460,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Skins\artDialog\doc\build\" />
     <Folder Include="Views\Upload\" />
     <Folder Include="Views\WebApi\" />
   </ItemGroup>
