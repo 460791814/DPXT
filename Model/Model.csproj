@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BaseModel.cs" />
     <Compile Include="E_Dic.cs" />
+    <Compile Include="E_Dpx.cs" />
     <Compile Include="E_Food.cs" />
     <Compile Include="E_Opinion.cs" />
     <Compile Include="E_CommentItem.cs" />

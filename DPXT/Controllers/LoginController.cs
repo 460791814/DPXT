@@ -31,7 +31,7 @@ namespace DPXT.Controllers
                 {
                     Utils.AddCookies("username", model.username);
                     Utils.AddCookies("password", model.password);
-                    Session["user"] = model;
+                    Session["user"] = eUser;
                     return "True" ;
                 }
                 else

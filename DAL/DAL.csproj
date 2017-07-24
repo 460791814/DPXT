@@ -55,6 +55,8 @@
     <Compile Include="D_Person.cs" />
     <Compile Include="D_Statistics.cs" />
     <Compile Include="D_Theme.cs" />
+    <Compile Include="D_ThemeCommentItem.cs" />
+    <Compile Include="D_ThemeOpinion.cs" />
     <Compile Include="D_User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

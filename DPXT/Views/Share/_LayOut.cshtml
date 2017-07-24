@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=10">
     <title>配餐服务跟踪点评系统 V1.0</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
@@ -35,23 +37,28 @@
                     </div>
                     <!-- /.navbar-header -->
                     <ul class="nav navbar-top-links navbar-right">
+                        @{ 
+
+                            var user = Session["user"]==null?new Model.E_User(): Session["user"] as Model.E_User;
+
                         <li class="dropdown">
                             <a class="dropdown-toggle ng-binding" data-toggle="dropdown" href="" aria-expanded="true">
-                                <i class="fa fa-user fa-fw"></i> xxxxx <i class="fa fa-caret-down"></i>
+                                <i class="fa fa-user fa-fw"></i> @user.username <i class="fa fa-caret-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-user">
                                 <li>
                                     <div class="dropdown-user-info">
-                                        <p class="text-success ng-binding">XXX</p>
-                                        <p class="text-muted ng-binding"><span>ID：</span>XXX</p>
-                                        <p class="text-muted ng-binding"><span>姓名：</span>张三</p>
-                                        <p class="text-muted ng-binding"><span>作业区：</span></p>
-                                        <p class="text-muted ng-binding"><span>班组：</span></p>
+                                        <p class="text-success ng-binding">@user.username</p>
+                                        <p class="text-muted ng-binding"><span>ID：</span>@user.userid</p>
+                                        <p class="text-muted ng-binding"><span>姓名：</span>@user.realname</p>
+                                        <p class="text-muted ng-binding"><span>作业区：</span>@user.areaname</p>
+                                        <p class="text-muted ng-binding"><span>班组：</span>@user.classinfoname</p>
                                     </div>
                                 </li>
                             </ul>
                             <!-- /.dropdown-user -->
                         </li>
+                        }
                         <li title="注销"> <a href="/Login/Login/"  > <i class="glyphicon glyphicon-log-in"></i> 注销 </a> </li>
                     </ul>
                     <div class="navbar-default sidebar navbar-static-side ng-isolate-scope" role="navigation">

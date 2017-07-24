@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Maticsoft.Model
+namespace Model
 {
 	/// <summary>
 	/// 点评主题

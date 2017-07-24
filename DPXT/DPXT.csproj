@@ -450,6 +450,7 @@
     <Content Include="upfile\综合平均201707222129.xls" />
     <Content Include="upfile\饮食习惯口径201707222244.xls" />
     <None Include="Properties\PublishProfiles\zyj_config.pubxml" />
+    <Content Include="Views\Theme\Dpx.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

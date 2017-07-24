@@ -33,10 +33,12 @@ namespace DPXT
                 if (eUser == null)
                 {
                     filterContext.Result = new RedirectResult("/Login/Login/");
+                    return;
                 }
                 if (eUser.password != model.password)
                 {
                     filterContext.Result = new RedirectResult("/Login/Login/");
+                    return;
                 }
                 filterContext.HttpContext.Session["user"] = eUser;
             }
