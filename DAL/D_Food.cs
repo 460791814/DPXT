@@ -39,9 +39,16 @@ namespace DAL
             {
                 whereSql.Append(" and foodname like '%'+@foodname +'%'");
             }
-            if (!String.IsNullOrEmpty(model.cookname))
+            if (!String.IsNullOrEmpty(model.pname))
             {
-                whereSql.Append(" and cookname like '%'+@cookname +'%'");
+                whereSql.Append(" and pname like '%'+@pname +'%'");
+            }
+            if (model.addtime != null) {
+                whereSql.Append(" and addtime=@addtime");
+            }
+            if (model.startaddtime != null)
+            {
+                whereSql.Append(" and addtime>=@startaddtime");
             }
             strSql.Append(whereSql);
             string CountSql = "SELECT COUNT(1) as RowsCount FROM (" + strSql.ToString() + ") AS CountList";
@@ -81,7 +88,7 @@ namespace DAL
         /// <returns></returns>
         public bool Add(E_Food model)
         {
-            string sql = "INSERT INTO dp_food(areaid, classinfoid, foodname, cookname, pic,updatetime) VALUES (@areaid, @classinfoid, @foodname, @cookname, @pic,@updatetime)";
+            string sql = "INSERT INTO dp_food(areaid, classinfoid, foodname,pid, pname, pic,updatetime,addtime) VALUES (@areaid, @classinfoid, @foodname,@pid, @pname, @pic,getdate(),getdate())";
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
                 int count = conn.Execute(sql, model);
@@ -103,7 +110,32 @@ namespace DAL
         public bool Update(E_Food model)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("update dp_food set areaid=@areaid, classinfoid=@classinfoid,foodname=@foodname,cookname=@cookname,pic=@pic  where foodid=@foodid ");
+            strSql.Append("update dp_food set areaid=@areaid, classinfoid=@classinfoid,foodname=@foodname,pid=@pid,pname=@pname,pic=@pic,updatetime=getdate()  where foodid=@foodid ");
+            using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
+            {
+                int count = conn.Execute(strSql.ToString(), model);
+                if (count > 0)//如果更新失败
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        public bool UpdateHits(E_Food model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            StringBuilder setSql = new StringBuilder();
+           
+            if (model.praise > 0) {
+                setSql.Append("praise=praise+1");
+            }
+            if (model.bad > 0) {
+                setSql.Append("bad=bad+1");
+            }
+            strSql.Append("update dp_food set  "+setSql+"  where foodid=@foodid ");
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
                 int count = conn.Execute(strSql.ToString(), model);

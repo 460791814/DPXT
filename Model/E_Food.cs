@@ -13,7 +13,7 @@ namespace Model
 		private int? _areaid;
 		private int? _classinfoid;
 		private string _foodname;
-		private string _cookname;
+	 
 		private string _pic;
 		private int? _praise;
 		private int? _bad;
@@ -54,10 +54,9 @@ namespace Model
 		/// <summary>
 		/// 厨师名称
 		/// </summary>
-		public string cookname
+		public string pname
 		{
-			set{ _cookname=value;}
-			get{return _cookname;}
+            get;set;
 		}
 		/// <summary>
 		/// 图片名称
@@ -100,7 +99,10 @@ namespace Model
 			get{return _updatetime;}
 		}
 		#endregion Model
+        public DateTime? addtime { get; set; }
+        public DateTime? startaddtime { get; set; }
+        public int? pid { get; set; }
 
-	}
+    }
 }
 

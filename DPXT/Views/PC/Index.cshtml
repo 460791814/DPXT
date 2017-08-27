@@ -1,0 +1,67 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="index,follow" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+ 
+    <link href="/Skins/PC/css/reset.css" rel="stylesheet" />
+    <link href="/Skins/PC/css/style.css" rel="stylesheet" />
+    <script src="/Skins/PC/js/jquery.js"></script>
+    <script src="/Skins/PC/js/pub.js"></script>
+ 
+</head>
+<body>
+
+    <!-- header start -->
+    <div class="comheader">
+        <h1>渤西终端欢迎您！</h1>
+        <h2 id="showtime">@DataHelper.GetCurrentTime()</h2>
+    </div>
+    
+    <div class="combody">
+        <div class="mainbd">
+            <div class="menu clearfix">
+                <a href="/PC/UserService" title="员工服务评价">
+                    <img src="/Skins/PC/images/m_03.jpg" /></a>
+                <a href="/PC/FoodLike" title="菜品点赞"><img src="/Skins/PC/images/m_05.jpg" alt=""></a>
+                <a href="javascript:void(0)" title="点评APP下载"><img src="/Skins/PC/images/m_07.jpg" alt=""></a>
+                <a href="/PC/Opinion" title="我要投诉"><img src="/Skins/PC/images/m_12.jpg" alt=""></a>
+                <a href="/PC/ChengGuo" title="成果展示"><img src="/Skins/PC/images/m_14.jpg" alt=""></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="comfooter">
+        <div class="phone"><span>应急投诉：400-8888-8888</span></div>
+    </div>
+
+
+
+    <script>
+        var timer1;
+        function starttimer() {
+            window.setTimeout(function () {
+            window.location.href = "/PC/ChengGuo";
+            }, 1000 * 5);  //timer1->1 当前是第一个定时器
+        }
+        starttimer();
+        function resettimer()
+        {
+            window.clearTimeout(timer1);
+            starttimer();
+        }
+    </script>
+
+
+</body>
+</html>

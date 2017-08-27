@@ -9,7 +9,7 @@ using System.Xml;
 using System.Text.RegularExpressions;
 using System.Net;
 using System.Data.SqlClient;
- 
+using System.Collections;
 
 namespace Comp
 {
@@ -232,7 +232,7 @@ namespace Comp
             }
             //PageStr.Append("<span class=\"rowscount\" title=\"每次最多显示10000条记录\">总数 " + DataSourceCount + "</span>");
 
-           
+
             if (CurrentPage > 1) PageStr.Append("<li class=\"paginate_button\"><a  href=\"" + LinkPage + "?page=" + (CurrentPage - 1) + QueryStr.ToString() + "\">上一页</a></li> ");
             if (iBegin > 1) PageStr.Append(" <li class=\"paginate_button\"> <a class=\"page\" href=\"" + LinkPage + "?page=1" + QueryStr.ToString() + "\">1..</a></li>");
             for (i = iBegin; i <= iEnd; i++)
@@ -242,7 +242,7 @@ namespace Comp
                 else
                     PageStr.Append("<li class=\"paginate_button\"> <a   href=\"" + LinkPage + "?page=" + i.ToString() + QueryStr.ToString() + "\">" + i.ToString() + "</a></li> ");
             }
-            
+
             if (iEnd < PageCount) PageStr.Append(" <li class=\"paginate_button\"><a class=\"page\" href=\"" + LinkPage + "?page=" + PageCount.ToString() + QueryStr.ToString() + "\"> .." + PageCount.ToString() + "</a></li>");
             if (CurrentPage < PageCount) PageStr.Append("<li class=\"paginate_button\"> <a class=\"nextpage\" href=\"" + LinkPage + "?page=" + (CurrentPage + 1) + QueryStr.ToString() + "\">下一页</a></li> ");
             //PageStr.Append(" <span class=\"jump\"><input name=\"page\" size=\"5\" type=\"text\" value=\"" + (CurrentPage + 1).ToString() + "\" class=\"pageinput\" maxlength=\"9\" /> <input type=\"button\" value=\"跳转\" class=\"gobutton\" onclick=\"window.location.href='" + LinkPage + "?page='+this.form.page.value+'" + QueryStr.ToString() + "'\" /></span>");
@@ -575,7 +575,7 @@ namespace Comp
         {
             return !Regex.IsMatch(str, @"^\s*$|^c:\\con\\con$|[%,\*" + "\"" + @"\s\t\<\>\&]|游客|^Guest");
         }
- 
+
         /// <summary>
         /// 是否包含过滤符号
         /// </summary>
@@ -1454,7 +1454,7 @@ namespace Comp
             string MonthStr = "0" + sTime.Month.ToString();
             return YearStr.Substring(2, 2) + MonthStr.Substring(MonthStr.Length - 2, 2) + "/";
         }
- 
+
         /// <summary>
         /// 生成一个GUID
         /// </summary>
@@ -1554,7 +1554,7 @@ namespace Comp
                 return "File.Err:" + sPath;
             }
         }
- 
+
         /// <summary>
         /// 获取来源页面URL
         /// </summary>
@@ -1831,8 +1831,8 @@ namespace Comp
         }
         #endregion
 
-         
- 
+
+
 
         /// <summary>
         /// 将对象转换为布尔值
@@ -1900,7 +1900,7 @@ namespace Comp
         /// <param name="strwhere">已有Where条件</param>
         /// <param name="newwhere">新增Where条件</param>
         /// <returns></returns>
-        public static void AddWhere(this StringBuilder strwhere,string newwhere)
+        public static void AddWhere(this StringBuilder strwhere, string newwhere)
         {
             if (string.IsNullOrEmpty(strwhere.ToString()))
             {
@@ -1920,29 +1920,30 @@ namespace Comp
         /// <param name="value"></param>
         /// <param name="expires"></param>
         /// <param name="domain"></param>
-        public static void AddCookies(String keyName,String value, DateTime? expires=null,string domain = null)
+        public static void AddCookies(String keyName, String value, DateTime? expires = null, string domain = null)
         {
-            if (expires == null) {
+            if (expires == null)
+            {
                 expires = DateTime.Now.AddDays(1);
             }
-           
+
             HttpCookie cookie = new HttpCookie(keyName, value);
             cookie.Expires = expires.Value;
             if (!string.IsNullOrWhiteSpace(domain))
             {
                 cookie.Domain = domain;
             }
-           
- 
+
+
             HttpContext.Current.Response.Cookies.Add(cookie);
         }
         public static void ClearCookies(String keyName)
         {
-         
+
 
             HttpCookie cookie = new HttpCookie(keyName);
             cookie.Expires = DateTime.Now.AddDays(-1);
-            
+
 
 
             HttpContext.Current.Response.Cookies.Add(cookie);
@@ -1952,11 +1953,50 @@ namespace Comp
         /// </summary>
         /// <param name="keyName"></param>
         /// <returns></returns>
-        public static String GetCookies(String keyName) {
-            if (HttpContext.Current.Request.Cookies[keyName] != null) {
+        public static String GetCookies(String keyName)
+        {
+            if (HttpContext.Current.Request.Cookies[keyName] != null)
+            {
                 return HttpContext.Current.Request.Cookies[keyName].Value;
             }
             return null;
+        }
+
+        public static string SetUpdateSql(Object model, string[] ziduan)
+        {
+            StringBuilder strSql = new StringBuilder();
+            if (model != null)
+            {
+                Type modelType = model.GetType();
+                var properties = model.GetType().GetProperties();
+                foreach (var item in properties)
+                {
+                    if (ziduan != null &&((IList)ziduan).Contains(item.Name))
+                    {
+                
+                             continue; 
+                         
+                    }
+                    if (item.Name == "PageSize" || item.Name == "PageIndex"  ) { continue; }
+
+                    if (item.GetValue(model) != null)
+                    {
+                        if (item.PropertyType.Name == "String")
+                        {
+
+                            var val = item.GetValue(model);
+                            if (val == null)
+                            {
+                                continue;
+                            }
+
+                        }
+                        strSql.AppendFormat(" {0} = @{0},", item.Name);
+                    }
+
+                }
+            }
+            return strSql.ToString().TrimEnd(',');
         }
         #endregion
     }

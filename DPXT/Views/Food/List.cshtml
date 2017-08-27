@@ -36,8 +36,9 @@
                         </div>
                         <div class="form-group input-group">
                             <span class="input-group-addon">厨师：</span>
-                            <input type="text" id="cookname" class="form-control" value="@Request["cookname"]">
-                        </div>
+                            <input type="text" id="pname" class="form-control" value="@Request["pname"]">
+                            
+</div>
                         <button type="button" class="btn btn-primary" onclick="redirect()">查询</button>
                         <button type="button" class="btn btn-primary" onclick="update(0)">添加</button>
 
@@ -65,7 +66,7 @@
                                     <td>@item.foodid</td>
 
                                     <td>@item.foodname</td>
-                                    <td>@item.cookname</td>
+                                    <td>@item.pname</td>
                                 
                                     <td>@DataHelper.GetClassInfoName(item.classinfoid)</td>
                                     <td>@(String.IsNullOrEmpty(item.pic) ? "否" : "是")</td>
@@ -177,7 +178,7 @@
         });
     }
     function redirect() {
-        window.location.href = "/Food/List?areaid=" + $("#area").val() + "&classinfoid=" + $("#classinfo").val() + "&foodname=" + $("#foodname").val() + "&cookname=" + $("#cookname").val();
+        window.location.href = "/Food/List?areaid=" + $("#area").val() + "&classinfoid=" + $("#classinfo").val() + "&foodname=" + $("#foodname").val() + "&pname=" + $("#pname").val();
     }
     //页面初始化内容
     $(document).ready(function () {

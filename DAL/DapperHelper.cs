@@ -18,20 +18,15 @@ namespace DAL
             string connStr;
             switch (db)
             {
-                case DB.Log:
-                    connStr = GetConStr("LogConnString");
-                    break;
-                case DB.Zxxk:
+                case DB.comment:
                     connStr = GetConStr("ConnString");
                     break;
-                case DB.WXT:
-                    connStr = GetConStr("WxtConnString");
+                case DB.CMS_Catering:
+                    connStr = GetConStr("CateringConnString");
                     break;
-                case DB.Sales:
-                    connStr = GetConStr("SalesConnString");
-                    break;
+ 
                 default:
-                    connStr = GetConStr("UserConnString");
+                    connStr = GetConStr("ConnString");
                     break;
             }
             return new SqlConnection(connStr);
@@ -48,10 +43,8 @@ namespace DAL
 
     public enum DB
     {
-        User,
-        Zxxk,
-        Log,
-        WXT, //王学通
-        Sales //销售
+        comment,
+        CMS_Catering,
+       
     }
 }

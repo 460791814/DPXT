@@ -1,0 +1,132 @@
+﻿@using Model;
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="index,follow" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="/Skins/PC/css/reset.css">
+    <link rel="stylesheet" href="/Skins/PC/css/style.css">
+    <script src="/Skins/PC/js/jquery.js"></script>
+    <script src="/Skins/PC/js/pub.js"></script>
+    <style>
+        .s {
+            display: block;
+        }
+
+        .h {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- header start -->
+    <div class="comheader">
+        <h1>渤西终端欢迎您！</h1>
+        <h2>@DataHelper.GetCurrentTime()</h2>
+    </div>
+
+    <div class="combody">
+        <div class="mainbd">
+            <div class="comtitle">菜品点赞</div>
+            <div class="course">
+                @{
+                    var list = (List<E_Food>)ViewBag.list;
+                    var pagesize = Math.Ceiling(list.Count / 10.0);
+                    for (int i = 0; i < pagesize; i++)
+                    {
+                        <ul class="clearfix @(i == 0 ? "s" : "h")">
+                            @{
+                                int sum = list.Count - (i * 10);
+                                if (sum > 10) { sum = 10; }
+                                for (int j = 0; j < sum; j++)
+                                {
+
+                                    <li>
+                                        <div class="course-box">
+                                            <img src="/Skins/PC/images/f1_03.jpg" alt="">
+                                            <h1>@list[i * 10 + j].foodname</h1>
+                                        </div>
+                                        <div class="zan-btns">
+                                            <div class="zan-gd" sum="@(list[i * 10 + j].praise)" onclick="save('foodid=@(list[i * 10 + j].foodid)&praise=1',this)">赞@(list[i * 10 + j].praise)</div>
+                                            <div class="zan-bd" sum="@(list[i * 10 + j].bad)" onclick="save('foodid=@(list[i * 10 + j].foodid)&bad=1',this)">差@(list[i * 10 + j].bad)</div>
+                                        </div>
+                                         
+                                    </li>
+                                }
+                            }
+
+
+                        </ul>
+
+                                }
+                }
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="comfooter">
+        <div class="comfooter-btns">
+            <a class="fl" href="javascript:;">查看结果</a>
+            <a class="fl" href="index">返回首页</a>
+            <a class="fr" href="javascript:;" onclick="nextpage()">下一页</a>
+            <a class="fr" href="javascript:;" onclick="prevpage()">上一页</a>
+        </div>
+    </div>
+    <script>
+            var timer1;
+            function starttimer() {
+                window.setTimeout(function () {
+                    window.location.href = "/PC/ChengGuo";
+                }, 1000 * 5);  //timer1->1 当前是第一个定时器
+            }
+            starttimer();
+            function resettimer() {
+                window.clearTimeout(timer1);
+                starttimer();
+            }
+    </script>
+
+    <script>
+
+        function nextpage() {
+            var temp = $(".s");
+            if (temp.next().attr("class").indexOf("h") > -1) {
+                temp.next().removeClass("h").addClass("s");
+                temp.removeClass("s").addClass("h");
+            }
+        }
+        function prevpage() {
+            var temp = $(".s");
+            if (temp.prev().attr("class").indexOf("h") > -1) {
+                temp.prev().removeClass("h").addClass("s");
+                temp.removeClass("s").addClass("h");
+            }
+        }
+        function save(data, t) {
+            var d = $(t);
+            $.post("/PC/UpdateFoodHit", data, function (data) {
+                if (data == "True") {
+                    var temp = d.html();
+                    var sum = parseInt( d.attr("sum")) + 1;
+                    d.attr("sum",sum);
+                    d.html(temp.substr(0, 1) + sum);
+
+            }
+            });
+            resettimer();
+        }
+    </script>
+
+
+
+</body>
+</html>

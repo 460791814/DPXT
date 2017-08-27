@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using Comp;
+using DAL;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace DPXT
        static  D_CommentType dCommentType = new D_CommentType();
         static D_Area dalArea = new D_Area();
         static D_ClassInfo dalclassinfo = new D_ClassInfo();
+        static D_Catering dCatering = new D_Catering();
         public static List<E_CommentType> GetCommentTypeList()
         {
           return  dCommentType.GetList();
@@ -30,7 +32,7 @@ namespace DPXT
             List<E_OpinionType> list = new List<E_OpinionType>() {
                  new E_OpinionType(){  OpinionTypeId=1, OpinionName="巡检点评意见"},
                    new E_OpinionType(){  OpinionTypeId=2, OpinionName="配餐服务投诉意见"},
-                    new E_OpinionType(){  OpinionTypeId=2, OpinionName="保洁服务投诉意见"}
+                    //new E_OpinionType(){  OpinionTypeId=3, OpinionName="保洁服务投诉意见"}
             }; 
             return list;
         }
@@ -61,6 +63,26 @@ namespace DPXT
         }
         public static List<E_Area> GetAreaList() {
             return dalArea.GetList();
+        }
+        public static string GetCurrentTime()
+        {
+            string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+            return DateTime.Now.ToString("yyyy-MM-dd")+"  "+ Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
+        }
+        public static List<Personnel> GetChuShiList()
+        {
+            List<Personnel> list = null;
+            object obj = Utils.Cache("chushi");
+            if (obj != null)
+            {
+                list = (List<Personnel>)obj;
+            }
+            else {
+                list = dCatering.GetList<Personnel>("select id,Name from Personnel where Professional='厨师'");
+                Utils.Cache("chushi", list, DateTime.Now.AddDays(3));
+            }
+            return list;
+
         }
     }
 }

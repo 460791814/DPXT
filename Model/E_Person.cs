@@ -17,7 +17,7 @@ namespace Model
         private int? _perfect;
         private int? _good;
         private int? _bad;
-        private int? _isdelete = 0;
+        private int? _isdelete ;
         /// <summary>
         /// 
         /// </summary>

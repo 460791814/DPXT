@@ -7,6 +7,7 @@ using Model;
 using Dapper;
 using System.Data.SqlClient;
 using System.Data;
+using Comp;
 
 namespace DAL
 {
@@ -79,6 +80,41 @@ namespace DAL
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
                 int count = conn.Execute(sql, model);
+                if (count > 0)//如果更新失败
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        /// <summary>
+        /// 评价
+        /// </summary>
+        /// <returns></returns>
+        public bool SumLike(E_Person model) {
+            StringBuilder strSql = new StringBuilder();
+            StringBuilder setSql = new StringBuilder();
+
+          
+
+            if (model.perfect != null && model.perfect > 0) {
+                setSql.Append("perfect=perfect+1,");
+            }
+            if (model.good != null && model.good > 0)
+            {
+                setSql.Append("good=good+1,");
+            }
+            if (model.bad != null && model.bad > 0)
+            {
+                setSql.Append("bad=bad+1,");
+            }
+            strSql.Append("update dp_person set "+setSql.ToString().TrimEnd(',')+"  where personid=@personid ");
+            using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
+            {
+                int count = conn.Execute(strSql.ToString(), model);
                 if (count > 0)//如果更新失败
                 {
                     return true;

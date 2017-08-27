@@ -1,0 +1,176 @@
+﻿@using Model;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="index,follow" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <link rel="stylesheet" href="/Skins/PC/css/reset.css">
+    <link rel="stylesheet" href="/Skins/PC/css/style.css">
+    <script src="/Skins/PC/js/jquery.js"></script>
+    <script src="/Skins/PC/js/pub.js"></script>
+    <style>
+        .s {
+            display: block;
+        }
+
+        .h {
+            display: none;
+        }
+    </style>
+
+    
+</head>
+<body>
+
+    <!-- header start -->
+    <div class="comheader">
+        <h1>渤西终端欢迎您！</h1>
+        <h2 id="showtime">@DataHelper.GetCurrentTime()</h2>
+    </div>
+
+
+    <div class="combody">
+        <div class="mainbd">
+            <div class="comtitle yg-title">员工服务评价</div>
+            <div class="evaluate">
+                <div class="eval-tit yg-tit">
+             
+                    <a class="on" href="javascript:;">员工先进性评价</a>
+                </div>
+                <div class="yg-peictabs">
+                    <div class="yg-lists">
+                        @{
+                            var list = (List<E_Person>)ViewBag.list;
+                            var pagesize = Math.Ceiling(list.Count / 10.0);
+                            for (int i = 0; i < pagesize; i++)
+                            {
+                                <ul class="clearfix @(i == 0 ? "s" : "h")">
+                                    @{
+                                        int sum = list.Count - (i * 10);
+                                        if (sum > 10) { sum = 10; }
+                                        for (int j = 0; j < sum; j++)
+                                        {
+                                            
+                                            <li>
+                                                <div class="yg-head">
+                                                    <img src="/Skins/PC/images/head_03.jpg" alt="">
+                                                    <p>@list[i * 10 + j].personname</p>
+                                                </div>
+                                                <div class="yg-lj"  >
+                                                    <input value="优秀" type="radio" name="pj@(list[i * 10 + j].personid)"  tag="perfect" personid="@(list[i * 10 + j].personid)">
+                                                    <label>优秀</label>
+                                                    <input value="一般" type="radio" name="pj@(list[i * 10 + j].personid)" tag="good" personid="@(list[i * 10 + j].personid)">
+                                                    <label>一般</label>
+                                                    <input value="差评" type="radio" name="pj@(list[i * 10 + j].personid)" tag="bad" personid="@(list[i * 10 + j].personid)">
+                                                    <label>差评</label>
+                                                </div>
+                                            </li>
+                                        }
+                                    }
+
+
+                                </ul>
+                                
+                           }
+                        }
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="comfooter">
+        <div class="comfooter-btns">
+            <a class="fl" href="index.html">返回首页</a>
+        
+            <input type="submit" class="pfbtn" value="提    交" onclick="save()">
+            <a class="fr" href="javascript:;" onclick="nextpage()">下一页</a>
+            <a class="fr" href="javascript:;" onclick="prevpage()">上一页</a>
+        </div>
+    </div>
+
+    <script>
+            var timer1;
+            function starttimer() {
+                window.setTimeout(function () {
+                    window.location.href = "/PC/ChengGuo";
+                }, 1000 * 5);  //timer1->1 当前是第一个定时器
+            }
+            starttimer();
+            function resettimer() {
+                window.clearTimeout(timer1);
+                starttimer();
+            }
+    </script>
+    <script>
+        function nextpage() {
+            var temp = $(".s");
+            if (temp.next().attr("class").indexOf("h") > -1) {
+                temp.next().removeClass("h").addClass("s");
+                temp.removeClass("s").addClass("h");
+            }
+        }
+        function prevpage() {
+            var temp = $(".s");
+            if (temp.prev().attr("class").indexOf("h") > -1) {
+                temp.prev().removeClass("h").addClass("s");
+                temp.removeClass("s").addClass("h");
+            }
+        }
+
+        function save() {
+         
+            if (GetJsonData().length <= 0) {
+                alert("请选中至少一项");
+                return false;
+            }
+           
+           
+
+            $.ajax({
+                type: 'POST',
+                url: '/PC/SavePerson',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(GetJsonData()),
+                success: function (data) {
+                    alert("感谢您宝贵的意见！有您的支持我们将会做的更好");
+                }
+
+            });
+            resettimer();
+        }
+        function GetJsonData() {
+
+
+            var arr = [];
+
+            $("input[type='radio']:checked").each(function () {
+
+                var tag = $(this).attr("tag").toString();
+                var personid = $(this).attr("personid");
+
+                var temp = { "personid": personid };
+                temp[tag] = 1;
+                arr.push(temp);
+            })
+
+        
+            return arr;
+        }
+    </script>
+
+
+
+</body>
+</html>

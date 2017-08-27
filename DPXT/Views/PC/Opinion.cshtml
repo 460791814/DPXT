@@ -1,0 +1,177 @@
+﻿@using Model;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="index,follow" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+ 
+    <link rel="stylesheet" href="/Skins/PC/css/reset.css">
+    <link rel="stylesheet" href="/Skins/PC/css/style.css">
+    <script src="/Skins/PC/js/jquery.js"></script>
+    <script src="/Skins/PC/js/pub.js"></script>
+    <style>
+        .s {
+        display:block;
+        }
+        .h {
+        display:none;
+        }
+    </style>
+ 
+    
+</head>
+<body>
+
+    <!-- header start -->
+    <div class="comheader">
+        <h1>渤西终端欢迎您！</h1>
+        <h2 id="showtime">@DataHelper.GetCurrentTime()</h2>
+    </div>
+ 
+    <div class="combody">
+        <div class="mainbd">
+            <div class="comtitle">我要投诉</div>
+            <div class="evaluate">
+                <div class="eval-tit">
+                    <a class="on" href="javascript:;">配餐服务</a>
+             
+                </div>
+                <div class="eval-peictabs">
+
+                    @{
+                        var list = (List<E_Opinion>)ViewBag.list;
+                        var pagesize = Math.Ceiling(list.Count / 8.0);
+                        for (int i = 0; i < pagesize; i++)
+                        {
+                            <ul class="eval-jy @(i==0?"s":"h")" >
+                               @{
+                                   int sum = list.Count - (i * 8);
+                                   if (sum > 8) { sum = 8; }
+                                   for (int j = 0; j < sum; j++)
+                                   {
+                                    <li>
+                                        <input type="checkbox" id="ts@(list[i * 8+j].opinionid)" value="@(list[i * 8+j].opinionid)" name="op">
+                                        <label for="ts@(list[i * 8+j].opinionid)">@list[i * 8+j].opinioncontent</label>
+                                    </li>
+                                   }
+                            }
+                               
+
+                            </ul>
+                        }
+                    }
+    
+
+                    <ul class="eval-jy">
+                        <li>
+                            <input type="checkbox" id="ts0">
+                            <label for="ts0">其他意见</label>
+                        </li>
+                        <li>
+                            <textarea name="" id="eval-textarea"></textarea>
+                        </li>
+                    </ul>
+                </div>
+
+                
+
+                </div>
+        </div>
+    </div>
+
+    <div class="comfooter">
+        <div class="comfooter-btns">
+            <a class="fl" href="index.html">返回首页</a>
+            <input type="submit" class="pfbtn" value="提    交" onclick="save()">
+            <a class="fr" href="javascript:;" onclick="nextpage()">下一页</a>
+            <a class="fr" href="javascript:;" onclick="prevpage()">上一页</a>
+        </div>
+    </div>
+    <script>
+            var timer1;
+            function starttimer() {
+                window.setTimeout(function () {
+                    window.location.href = "/PC/ChengGuo";
+                }, 1000 * 5);  //timer1->1 当前是第一个定时器
+            }
+            starttimer();
+            function resettimer() {
+                window.clearTimeout(timer1);
+                starttimer();
+            }
+    </script>
+    <script>
+        function nextpage() {
+            var temp = $(".s");
+            if (temp.next().attr("class").indexOf("h")>-1){
+            temp.next().removeClass("h").addClass("s");
+            temp.removeClass("s").addClass("h");
+            }
+        }
+        function prevpage() {
+            var temp = $(".s");
+            if (temp.prev().attr("class").indexOf("h") > -1) {
+                temp.prev().removeClass("h").addClass("s");
+                temp.removeClass("s").addClass("h");
+            }
+        }
+ 
+        function save() {
+            if ($("#eval-textarea").val().replace(/[ ]/g, "") == "") {
+                var opinion = [];
+
+                $("input[name='op']:checked").each(function () {
+
+                    var opval = $(this).val();
+                    var temp = { "opinionid": opval };
+                    opinion.push(temp);
+                })
+                if (opinion.length <= 0) {
+                    alert("请勾选投诉项或填写投诉意见");
+                    return false;
+                }
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '/PC/SaveOpinion',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(GetJsonData()),
+                success: function (data) {
+                    alert("感谢您宝贵的意见！有您的支持我们将会做的更好");
+                }
+
+            });
+            resettimer();
+        }
+        function GetJsonData() {
+
+
+            var opinion = [];
+
+            $("input[name='op']:checked").each(function () {
+
+                var opval = $(this).val();
+                var temp = { "opinionid": opval };
+                opinion.push(temp);
+            })
+
+            var json = { "contents": $("#eval-textarea").val(), "opinionlist": opinion };
+            return json;
+        }
+    </script>
+
+
+
+
+</body>
+</html>
