@@ -12,6 +12,30 @@ namespace DAL
 {
    public class D_CommentType
     {
+
+        /// <summary>
+        /// 查询某主题下的点评维度
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<E_CommentType> GetListByThemeid(E_CommentType model)
+        {
+            List<E_CommentType> list;
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(@"select * from dp_commenttype  where commenttypeid in
+                            (
+                                select commenttypeid from (
+                                select * from dp_themecommentitem where themeid=@themeid
+                                ) as A inner join dp_commentitem as B on A.commentitemid=B.commentitemid
+                                group by commenttypeid
+                            ) and isdelete=0");
+            using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
+            {
+                list = conn.Query<E_CommentType>(strSql.ToString(), model)?.ToList();
+            }
+            return list;
+        }
+
         /// <summary>
         /// 查询
         /// </summary>

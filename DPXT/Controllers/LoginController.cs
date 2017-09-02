@@ -19,6 +19,15 @@ namespace DPXT.Controllers
             Utils.ClearCookies("password");
             return View();
         }
+
+        /// <summary>
+        /// 手机端登陆页
+        /// </summary>
+        [Route("app/login")]
+        public ActionResult AppLogin()
+        {
+            return View("~/views/App/Login.cshtml");
+        }
         
 
         public String DoLoginAjax(E_User model)

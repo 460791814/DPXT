@@ -1,0 +1,81 @@
+﻿@using Model;
+@{
+    Layout = null;
+    var userinfo = ViewBag.userinfo as E_User;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="/skins/app/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/skins/app/css/style.css">
+    <script type="text/javascript" src="/skins/app/js/jquery.js"></script>
+    <script type="text/javascript" src="/skins/app/js/pub.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="headtop clearfix">
+            <a class="return" href="javascript:history.back()"></a><h1>欢迎您！ @userinfo.areaname-@userinfo.classinfoname</h1>
+        </div>
+        <div class="headbot clearfix">
+            <h1>您的基本情况</h1>
+        </div>
+    </div>
+
+    <form action="/app/commentcontent" method="get">
+        <div class="information">
+            <ul>
+                <li class="clearfix">
+                    <span>您的性别：</span>
+                    <input type="radio" id="sex1" value="1" name="sex" checked><label for="sex1">男</label>
+                    <input type="radio" id="sex2" value="2" name="sex"><label for="sex2">女</label>
+                </li>
+                <li class="clearfix">
+                    <span>您的年龄：</span>
+                    <input type="radio" id="age1" value="1" name="ageround" checked><label for="age1">10-30岁</label>
+                    <input type="radio" id="age2" value="2" name="ageround"><label for="age2">31-45岁</label>
+                    <input type="radio" id="age3" value="3" name="ageround"><label for="age3">45岁以上</label>
+                </li>
+                <li class="clearfix">
+                    <span>饮食习惯：</span>
+                    <input type="radio" id="xg1" value="1" name="domain" checked><label for="xg1">南方</label>
+                    <input type="radio" id="xg2" value="2" name="domain"><label for="xg2">北方</label>
+                </li>
+                <li class="clearfix">
+                    <span>工作性质：</span>
+                    <input type="radio" id="work1" value="1" name="job" checked><label for="work1">定员</label>
+                    <input type="radio" id="work2" value="2" name="job"><label for="work2">访客</label>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 点评主题 -->
+        <div class="dpzt">
+            <div class="critique clearfix">
+                <h1>点评主题</h1>
+            </div>
+            <div class="dp">
+                <ul>
+                    @{
+                        var listtheme = ViewBag.listtheme as List<E_Theme>;
+                        foreach (var item in listtheme)
+                        {
+                            <li><input type="radio" id="@("zt"+item.themeid)" value="@item.themeid" name="themeid"><label for="@("zt"+item.themeid)">@item.themename</label></li>
+                        }
+                    }
+                </ul>
+            </div>
+
+            <input type="hidden" name="areaid" value="@userinfo.areaid" />
+            <input type="hidden" name="classinfoid" value="@userinfo.classinfoid" />
+            <input type="hidden" name="userid" value="@userinfo.userid" />
+            <input type="submit" class="dpbtn" value="开始点评">
+        </div>
+    </form>
+</body>
+</html>

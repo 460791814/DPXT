@@ -16,14 +16,34 @@ namespace DAL
         /// <summary>
         /// 查询
         /// </summary>
+        /// <param name="model">model</param>
+        /// <returns></returns>
+        public List<E_Opinion> GetList(E_Opinion model)
+        {
+            if (model.PageIndex <= 0) { model.PageIndex = 1; }
+            List<E_Opinion> list;
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(@"select * 
+                            from dp_themeopinion as A inner join dp_opinion as B on A.opinionid=B.opinionid
+                            where  B.isdelete=0 and A.themeid=@themeid");
+
+            using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
+            {
+                list = conn.Query<E_Opinion>(strSql.ToString(), model)?.ToList();
+            }
+            return list;
+        }
+
+
+        /// <summary>
+        /// 查询
+        /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="model"></param>
         /// <returns></returns>
         public List<E_Opinion> GetList(E_Opinion model, ref int total)
         {
             if (model.PageIndex <= 0) { model.PageIndex = 1; }
-         
-
             List<E_Opinion> list;
             StringBuilder strSql = new StringBuilder();
             StringBuilder whereSql = new StringBuilder(" where isdelete=0 ");
@@ -35,7 +55,6 @@ namespace DAL
             strSql.Append(whereSql);
             string CountSql = "SELECT COUNT(1) as RowsCount FROM (" + strSql.ToString() + ") AS CountList";
   
- 
             string pageSqlStr = "select * from ( " + strSql.ToString() + " ) as Temp_PageData where Temp_PageData.RID BETWEEN {0} AND {1}";
             pageSqlStr = string.Format(pageSqlStr, (model.PageSize * (model.PageIndex - 1) + 1).ToString(), (model.PageSize * model.PageIndex).ToString());
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))

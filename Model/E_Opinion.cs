@@ -56,6 +56,11 @@ namespace Model
 		}
 		#endregion Model
 
-	}
+        /// <summary>
+        /// 主题ID
+        /// </summary>
+        public int themeid { get; set; }
+
+    }
 }
 

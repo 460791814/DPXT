@@ -70,7 +70,7 @@ namespace DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append(@"select *,Name as areaname,CName as classinfoname  from (
-                            select * from dp_user  where username =@username) a
+                            select * from dp_user  where username =@username and password=@password) a
                               left join dbo.Area b on a.areaid = b.id
                             left join dbo.ClassInfo c on a.classinfoid = c.id");
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))

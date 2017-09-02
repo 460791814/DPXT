@@ -387,8 +387,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AppAuthAttribute.cs" />
     <Compile Include="App_Start\AuthAttribute.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\CommentItemController.cs" />
     <Compile Include="Controllers\CommentTypeController.cs" />
     <Compile Include="Controllers\FoodController.cs" />
@@ -522,6 +524,9 @@
     <Content Include="Views\PC\Opinion.cshtml" />
     <Content Include="Views\PC\UserService.cshtml" />
     <Content Include="Views\PC\FoodLike.cshtml" />
+    <Content Include="Views\App\Login.cshtml" />
+    <Content Include="Views\App\SelectTheme.cshtml" />
+    <Content Include="Views\App\CommentContent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

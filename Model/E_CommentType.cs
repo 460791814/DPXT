@@ -12,5 +12,10 @@ namespace Model
         public string typename { get; set; }
         public int isdelete { get; set; }
         
+        /// <summary>
+        /// 主题ID
+        /// </summary>
+        public int themeid { get; set; }
+
     }
 }

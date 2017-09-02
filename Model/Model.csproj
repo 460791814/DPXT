@@ -44,6 +44,9 @@
     <Compile Include="BaseModel.cs" />
     <Compile Include="dp_servicecomplain.cs" />
     <Compile Include="dp_servicecomplainopinion.cs" />
+    <Compile Include="E_Comment.cs" />
+    <Compile Include="E_CommentCommentItem.cs" />
+    <Compile Include="E_CommentOpinion.cs" />
     <Compile Include="E_Dic.cs" />
     <Compile Include="E_Dpx.cs" />
     <Compile Include="E_Food.cs" />
