@@ -78,7 +78,7 @@ namespace DPXT
                 list = (List<Personnel>)obj;
             }
             else {
-                list = dCatering.GetList<Personnel>("select id,Name from Personnel where Professional='厨师'");
+                list = dCatering.GetChuShi();
                 Utils.Cache("chushi", list, DateTime.Now.AddDays(3));
             }
             return list;

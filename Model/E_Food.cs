@@ -102,6 +102,7 @@ namespace Model
         public DateTime? addtime { get; set; }
         public DateTime? startaddtime { get; set; }
         public int? pid { get; set; }
+        public int? dishid { get; set; }
 
     }
 }

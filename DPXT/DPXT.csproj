@@ -394,6 +394,7 @@
       <DependentUpon>UploadHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Mousse\DataHelper.cs" />
+    <Compile Include="Mousse\FoodSync.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

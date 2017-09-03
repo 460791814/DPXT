@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using Model;
 
 namespace DAL
 {
@@ -27,6 +28,26 @@ namespace DAL
 
             }
             return list;
+        }
+        public List<Personnel> GetChuShi() {
+            return GetList<Personnel>("select id,Name from Personnel where Professional='厨师'");
+        }
+        /// <summary>
+        /// 获取当天菜
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="areaId"></param>
+        /// <param name="classIds"></param>
+        /// <returns></returns>
+        public List<E_Dish> GetDishCurrDay(DateTime date,int areaId,int classIds) {
+            string sql = @"select a.id,MID,CID,Name,Picture,b.AreaID,b.ClassID from (
+                                    select id,MID,CID from dbo.RecipeInformation where Date='{0}'  
+                                    ) a 
+                                    inner join dbo.Recipes b on b.id=a.MID
+                                    inner join Dish c on c.id=a.CID
+                                    where AreaID={1} and ClassID={2}";
+            sql = string.Format(sql, date, areaId, classIds);
+            return GetList<E_Dish>(sql);
         }
     }
 }

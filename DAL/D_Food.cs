@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using Comp;
 
 namespace DAL
 {
@@ -74,6 +75,22 @@ namespace DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select * from dp_food where foodid=@foodid");
+           
+            using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
+            {
+                model = conn.Query<E_Food>(strSql.ToString(), model)?.FirstOrDefault();
+
+            }
+            return model;
+        }
+        public E_Food GetInfoByDishId(E_Food model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select * from dp_food where dishid=@dishid ");
+            if (model.startaddtime != null)
+            {
+                strSql.Append(" and addtime>=@startaddtime");
+            }
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
                 model = conn.Query<E_Food>(strSql.ToString(), model)?.FirstOrDefault();
@@ -88,7 +105,7 @@ namespace DAL
         /// <returns></returns>
         public bool Add(E_Food model)
         {
-            string sql = "INSERT INTO dp_food(areaid, classinfoid, foodname,pid, pname, pic,updatetime,addtime) VALUES (@areaid, @classinfoid, @foodname,@pid, @pname, @pic,getdate(),getdate())";
+            string sql = "INSERT INTO dp_food(areaid, classinfoid,dishid, foodname,pid, pname, pic,updatetime,addtime) VALUES (@areaid, @classinfoid,@dishid, @foodname,@pid, @pname, @pic,getdate(),getdate())";
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
                 int count = conn.Execute(sql, model);
@@ -109,8 +126,11 @@ namespace DAL
         /// <returns></returns>
         public bool Update(E_Food model)
         {
+            model.updatetime = DateTime.Now;
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("update dp_food set areaid=@areaid, classinfoid=@classinfoid,foodname=@foodname,pid=@pid,pname=@pname,pic=@pic,updatetime=getdate()  where foodid=@foodid ");
+            //  strSql.Append("update dp_food set areaid=@areaid, classinfoid=@classinfoid,foodname=@foodname,pid=@pid,pname=@pname,pic=@pic,updatetime=getdate()  where foodid=@foodid ");
+            strSql.Append("update dp_food set "+ Utils.SetUpdateSql(model, new string[] { "foodid" }) + " where foodid=@foodid ");
+ 
             using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
             {
                 int count = conn.Execute(strSql.ToString(), model);

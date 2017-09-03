@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DPXT.Mousse;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,8 @@ namespace DPXT
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            //菜同步
+            new FoodSync().Start(); 
             
         }
     }
