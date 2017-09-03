@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using Comp;
+using DAL;
 using Model;
 using Newtonsoft.Json;
 using System;
@@ -11,12 +12,13 @@ namespace DPXT.Controllers
 {
     public class PCController : Controller
     {
+
         D_Opinion dOpinion = new D_Opinion();
         D_ServiceComplain dServiceComplain = new D_ServiceComplain();
         D_User dUser = new D_User();
         D_Person dPerson = new D_Person();
         D_Food dFood = new D_Food();
-
+        E_User user = null;
         // GET: PC
         public ActionResult Index()
         {
@@ -26,6 +28,7 @@ namespace DPXT.Controllers
         {
             return View();
         }
+
         /// <summary>
         /// 配餐服务意见
         /// </summary>
@@ -47,8 +50,8 @@ namespace DPXT.Controllers
 
             int servicecomplainid = dServiceComplain.Add(new dp_servicecomplain()
             {
-                classinfoid = 1,
-                areaid = 1,
+                classinfoid = user.classinfoid,
+                areaid = user.areaid,
                 contents = model.contents,
                 addtime = DateTime.Now
             });
@@ -79,7 +82,8 @@ namespace DPXT.Controllers
         {
             int total = 0;
             var list = dPerson.GetList(new E_Person() {
-
+                classinfoid = user.classinfoid,
+                areaid = user.areaid,
                 PageSize = 10000
             },ref total);
             ViewBag.list = list;
@@ -90,7 +94,9 @@ namespace DPXT.Controllers
         {
             int total = 0;
             var list=  dFood.GetList(new E_Food() {
-                PageSize=10000,
+                classinfoid = user.classinfoid,
+                areaid = user.areaid,
+                PageSize =10000,
                  startaddtime= Convert.ToDateTime( DateTime.Now.ToString("D"))
             }, ref total);
             ViewBag.list = list;
@@ -100,6 +106,35 @@ namespace DPXT.Controllers
         {
           return  dFood.UpdateHits(model);
             
+        }
+        /// <summary>
+        /// 登录过滤器 针对该控制的所有方法
+        /// </summary>
+        /// <param name="filterContext"></param>
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            base.OnActionExecuting(filterContext);
+
+            if (filterContext.HttpContext.Session["user_pc"] == null)
+            {
+                E_User model = new E_User();
+                model.username = Utils.GetCookies("username");
+                model.password = Utils.GetCookies("password");
+
+                E_User eUser = dUser.GetInfoByName(model);
+                if (eUser == null)
+                {
+                    filterContext.Result = new RedirectResult("/PC/Login/");
+                    return;
+                }
+                if (eUser.password != model.password)
+                {
+                    filterContext.Result = new RedirectResult("/PC/Login/");
+                    return;
+                }
+                filterContext.HttpContext.Session["user_pc"] = eUser;
+            }
+            user = filterContext.HttpContext.Session["user_pc"] as E_User;
         }
     }
 }

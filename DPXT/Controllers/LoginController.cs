@@ -28,7 +28,11 @@ namespace DPXT.Controllers
         {
             return View("~/views/App/Login.cshtml");
         }
-        
+        [Route("PC/Login")]
+        public ActionResult PCLogin()
+        {
+            return View("~/views/PC/Login.cshtml");
+        }
 
         public String DoLoginAjax(E_User model)
         {

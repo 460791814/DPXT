@@ -39,14 +39,13 @@ namespace DAL
         /// <param name="areaId"></param>
         /// <param name="classIds"></param>
         /// <returns></returns>
-        public List<E_Dish> GetDishCurrDay(DateTime date,int areaId,int classIds) {
+        public List<E_Dish> GetDishCurrDay(DateTime date) {
             string sql = @"select a.id,MID,CID,Name,Picture,b.AreaID,b.ClassID from (
                                     select id,MID,CID from dbo.RecipeInformation where Date='{0}'  
                                     ) a 
                                     inner join dbo.Recipes b on b.id=a.MID
-                                    inner join Dish c on c.id=a.CID
-                                    where AreaID={1} and ClassID={2}";
-            sql = string.Format(sql, date, areaId, classIds);
+                                    inner join Dish c on c.id=a.CID";
+            sql = string.Format(sql, date );
             return GetList<E_Dish>(sql);
         }
     }

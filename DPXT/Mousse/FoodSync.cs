@@ -20,11 +20,11 @@ namespace DPXT.Mousse
         System.Timers.Timer myTimer;
         public void Start()
         {
-            myTimer = new System.Timers.Timer(1000*5);//定时周期2秒
+            myTimer = new System.Timers.Timer(1000 * 60 * 10);//定时周期2秒 10分钟同步一次
             myTimer.Elapsed += myTimer_Elapsed;//到2秒了做的事件
             myTimer.AutoReset = true; //是否不断重复定时器操作
             myTimer.Enabled = true;
-         
+
         }
 
         private void myTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -34,40 +34,46 @@ namespace DPXT.Mousse
             thread.Start();
         }
 
-        public void Sync() {
+        public void Sync()
+        {
             DateTime currTime = Convert.ToDateTime(DateTime.Now.AddMonths(-8).ToString("D"));
-          List<E_Dish> list= dal.GetDishCurrDay(currTime, 1, 42);
- 
-           
+            List<E_Dish> list = dal.GetDishCurrDay(currTime);
+
+
 
             if (list != null)
             {
                 foreach (var item in list)
                 {
-                  E_Food eFood=  dFood.GetInfoByDishId(new E_Food() { dishid = item.id, addtime = currTime });
+                    E_Food eFood = dFood.GetInfoByDishId(new E_Food() { dishid = item.id, addtime = currTime });
                     if (eFood == null)
                     {
                         dFood.Add(new E_Food()
                         {
-                            areaid = 1,
-                            classinfoid = 42,
+                            areaid = item.AreaID,
+                            classinfoid = item.ClassID,
                             dishid = item.id,
                             foodname = item.Name,
                             pic = item.Picture
                         });
                     }
-                    else {
-                        dFood.Update(new E_Food()
+                    else
+                    {
+                        //当名称不一样时同步
+                        if (eFood.foodname != item.Name || eFood.pic != item.Picture)
                         {
-                            
-                           foodid=eFood.foodid,
-                            foodname = item.Name,
-                            pic = item.Picture
-                        });
+                            dFood.Update(new E_Food()
+                            {
+
+                                foodid = eFood.foodid,
+                                foodname = item.Name,
+                                pic = item.Picture
+                            });
+                        }
                     }
                 }
             }
-          
+
 
         }
     }

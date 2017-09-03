@@ -337,6 +337,7 @@
     <Content Include="Skins\PC\js\pub.js" />
     <Content Include="Skins\PC\js\SuperSlide.js" />
     <Content Include="Skins\PC\js\swiper.js" />
+    <Content Include="Skins\PC\js\timer.js" />
     <Content Include="Skins\PC\picture\m_03.jpg" />
     <Content Include="Skins\PC\picture\m_05.jpg" />
     <Content Include="Skins\PC\picture\m_07.jpg" />
@@ -391,6 +392,7 @@
     <Compile Include="App_Start\AuthAttribute.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AppController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CommentItemController.cs" />
     <Compile Include="Controllers\CommentTypeController.cs" />
     <Compile Include="Controllers\FoodController.cs" />
@@ -528,6 +530,7 @@
     <Content Include="Views\App\Login.cshtml" />
     <Content Include="Views\App\SelectTheme.cshtml" />
     <Content Include="Views\App\CommentContent.cshtml" />
+    <Content Include="Views\PC\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -540,6 +543,7 @@
     <Folder Include="Models\" />
     <Folder Include="Skins\artDialog\doc\build\" />
     <Folder Include="Skins\PC\images\images\" />
+    <Folder Include="Views\Base\" />
     <Folder Include="Views\Upload\" />
     <Folder Include="Views\WebApi\" />
   </ItemGroup>

@@ -89,25 +89,13 @@
 
     <div class="comfooter">
         <div class="comfooter-btns">
-            <a class="fl" href="index.html">返回首页</a>
+            <a class="fl" href="/PC/Index">返回首页</a>
             <input type="submit" class="pfbtn" value="提    交" onclick="save()">
             <a class="fr" href="javascript:;" onclick="nextpage()">下一页</a>
             <a class="fr" href="javascript:;" onclick="prevpage()">上一页</a>
         </div>
     </div>
-    <script>
-            var timer1;
-            function starttimer() {
-                window.setTimeout(function () {
-                    window.location.href = "/PC/ChengGuo";
-                }, 1000 * 5);  //timer1->1 当前是第一个定时器
-            }
-            starttimer();
-            function resettimer() {
-                window.clearTimeout(timer1);
-                starttimer();
-            }
-    </script>
+ 
     <script>
         function nextpage() {
             var temp = $(".s");
@@ -148,6 +136,7 @@
                 data: JSON.stringify(GetJsonData()),
                 success: function (data) {
                     alert("感谢您宝贵的意见！有您的支持我们将会做的更好");
+                    window.location.reload();
                 }
 
             });
@@ -170,7 +159,7 @@
         }
     </script>
 
-
+    <script src="/Skins/PC/js/timer.js"></script>
 
 
 </body>
