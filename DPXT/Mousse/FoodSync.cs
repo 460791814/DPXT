@@ -36,7 +36,7 @@ namespace DPXT.Mousse
 
         public void Sync()
         {
-            DateTime currTime = Convert.ToDateTime(DateTime.Now.AddMonths(-8).ToString("D"));
+            DateTime currTime = Convert.ToDateTime(DateTime.Now.ToString("D"));
             List<E_Dish> list = dal.GetDishCurrDay(currTime);
 
 
