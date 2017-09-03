@@ -12,6 +12,27 @@ namespace DAL
 {
     public class D_CommentItem
     {
+
+        /// <summary>
+        /// 依据主题ID 查询对应的点评项
+        /// </summary>
+        /// <param name="themeid">主题ID</param>
+        /// <returns></returns>
+        public List<E_CommentItem> GetCommentItemByThemeID(int themeid)
+        {
+            List<E_CommentItem> list;
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append($@"select B.* from (
+                                select * from dp_themecommentitem where themeid={themeid}
+                            ) as A inner join dp_commentitem as B on A.commentitemid=B.commentitemid 
+                            where B.isdelete=0");
+            using (IDbConnection conn = new SqlConnection(DapperHelper.GetConStr()))
+            {
+                list = conn.Query<E_CommentItem>(strSql.ToString())?.ToList();
+            }
+            return list;
+        }
+        
         /// <summary>
         /// 查询
         /// </summary>
@@ -24,6 +45,7 @@ namespace DAL
             StringBuilder strSql = new StringBuilder();
             StringBuilder whereSql = new StringBuilder(" where isdelete=0 ");
             strSql.Append("select * from dp_commentitem ");
+
             if (model.commenttypeid > 0) {
                 whereSql.Append(" and commenttypeid=@commenttypeid");
             }

@@ -49,7 +49,10 @@
     <Compile Include="D_Area.cs" />
     <Compile Include="D_Catering.cs" />
     <Compile Include="D_ClassInfo.cs" />
+    <Compile Include="D_Comment.cs" />
+    <Compile Include="D_CommentCommentItem.cs" />
     <Compile Include="D_CommentItem.cs" />
+    <Compile Include="D_CommentOpinion.cs" />
     <Compile Include="D_CommentType.cs" />
     <Compile Include="D_Food.cs" />
     <Compile Include="D_Opinion.cs" />

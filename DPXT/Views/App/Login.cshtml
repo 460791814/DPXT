@@ -1,0 +1,45 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="/skins/app/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/skins/app/css/style.css">
+    <script type="text/javascript" src="/skins/app/js/jquery.js"></script>
+    <script type="text/javascript" src="/skins/app/js/pub.js"></script>
+    <script>
+        function login() {
+            var data = "username=" + $("#username").val() + "&password=" + $("#password").val();
+            $.post("/Login/DoLoginAjax", data, function (data) {
+                if (data == "True") {
+                    window.location.href = "/app/selecttheme";
+
+                } else {
+                    alert(data);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="sybody">
+        <img src="/skins/app/images/sy_02.png" alt="">
+        <h1>配餐服务跟踪点评系统</h1>
+        <div class="sign-in">
+                <input type="text" id="username" class="f-txt sign-name" placeholder="请输入用户名">
+                <input type="password" id="password" class="f-txt sign-password" placeholder="请输入密码">
+                <input type="submit" id="sign-btn" value="登    录" onclick="login()">
+        </div>
+        <a href="tel:400-8888-8888">TEL：400-8888-8888</a>
+    </div>
+</body>
+</html>

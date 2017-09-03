@@ -1,0 +1,218 @@
+﻿@using Model;
+@{
+    Layout = null;
+    var userinfo = ViewBag.userinfo as E_User;
+    var CommentInfo = ViewBag.CommentInfo as E_Comment;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="/skins/app/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/skins/app/css/style.css">
+    <script type="text/javascript" src="/skins/app/js/jquery.js"></script>
+    <script type="text/javascript" src="/skins/app/js/pub.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="headtop clearfix">
+            <a class="return" href="javascript:history.back()"></a><h1>欢迎您！ @userinfo.areaname-@userinfo.classinfoname</h1>
+        </div>
+    </div>
+
+    @{
+        var itemindex = 1;
+        var listCommentType = ViewBag.listCommentType as List<E_CommentType>;
+        foreach (var CommentType in listCommentType)
+        {
+            <div class="headbot clearfix" style="margin-top:20px;">
+                <h1>调查问项【@CommentType.typename】</h1>
+            </div>
+            <!-- 调查问卷 -->
+            <div class="examine">
+                <ul>
+                    @{
+                        var listCommentItem = (ViewBag.listCommentItem as List<E_CommentItem>).Where(p => p.commenttypeid == CommentType.commenttypeid).ToList(); ;
+                        foreach (var CommentItem in listCommentItem)
+                        {
+                            <li id="@("commentitem_"+CommentItem.commentitemid)">
+                                <h1>@itemindex、@CommentItem.title</h1>
+                                <div class="examine-pl clearfix CommentItem">
+                                    <input type="hidden" class="CommentItemInput" value="@(CommentItem.commentitemid+"_0_0")" />
+                                    <div class="examine-pl-lists">
+                                        <h2>期望值</h2>
+                                        <div class="starts clearfix expect">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                    <div class="examine-pl-lists">
+                                        <h2>感知值</h2>
+                                        <div class="starts clearfix real">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            itemindex++;
+                        }
+                    }
+                </ul>
+            </div>
+                        }
+    }
+    <div class="header" style="margin-top:20px;">
+        <div class="headbot clearfix">
+            <h1>您的意见</h1>
+        </div>
+    </div>
+
+    <!-- 意见列表 -->
+    <div class="opinion-lists">
+        <ul>
+            @{
+                var listopinion = ViewBag.listopinion as List<E_Opinion>;
+                foreach (var item in listopinion)
+                {
+                    <li class="clearfix">
+                        <input id="@("o"+item.opinionid)" type="checkbox" class="OpinionItemInput" value="@item.opinionid">
+                        <label for="@("o"+item.opinionid)">@item.opinioncontent</label>
+                    </li>
+                }
+            }
+            <li>
+                <h1>其他意见：</h1>
+                <textarea name="contents" id="other-opinions"></textarea>
+            </li>
+        </ul>
+        <div class="opinion-btns clearfix">
+            <a class="opinion-return" href="javascript:;">上一页</a>
+            <input class="opbtn" value="提   交" type="submit" onclick="Save()">
+        </div>
+    </div>
+
+    <script>
+        // 星星
+        $('.starts span').click(function (event) {
+            $(this).parents('.starts').find('span').removeClass('on');
+            var num = $(this).index() + 1;
+            $(this).parents('.starts').find('span').each(function (index, el) {
+                if ($(this).index() < num) {
+                    $(this).addClass('on');
+                }
+            });
+
+            var value = $(this).parents('.CommentItem').find('input').val();
+            var commentitemid = value.split('_')[0];
+            var expect = value.split('_')[1];
+            var real = value.split('_')[2];
+
+            if ($(this).parents('.expect').length>0) {
+                expect = num;
+            }
+            else {
+                real = num;
+            }
+            $(this).parents('.CommentItem').find('input').val(commentitemid + "_" + expect + "_" + real);
+        });
+
+
+        //验证 是否存在未点评选项
+        function IsV()
+        {
+            var id=0;
+            $(".CommentItemInput").each(function(){
+                var value=$(this).val();
+                if(value!="")
+                {
+                    var commentitemid = value.split('_')[0];
+                    var expect = value.split('_')[1];
+                    var real = value.split('_')[2];
+                    if((expect==0||real==0)&&id==0)
+                    {
+                        id=commentitemid
+                    }
+                }
+            });
+            return id;
+        }
+
+
+        //提交评论
+        function Save()
+        {
+            //暂时屏蔽点评校验
+            //var id=IsV();
+            //if(id>0)
+            //{
+            //    alert('存在未点评选项！');
+            //    var href=window.location.href;
+            //    href=href.substring(0,href.indexOf('#'))+'#commentitem_'+id;
+            //    window.location.href=href;
+            //    return;
+            //}
+
+            var userid=@CommentInfo.userid;
+            var areaid=@CommentInfo.areaid;
+            var classinfoid=@CommentInfo.classinfoid;
+            var sex=@CommentInfo.sex;
+            var ageround=@CommentInfo.ageround;
+            var domain=@CommentInfo.domain;
+            var job=@CommentInfo.job;
+            var contents=$("#other-opinions").val();
+
+            //点评项
+            var commentcommentitem="[";
+            $(".CommentItemInput").each(function(){
+                var value=$(this).val();
+                if(value!="")
+                {
+                    var commentitemid = value.split('_')[0];
+                    var expect = value.split('_')[1];
+                    var real = value.split('_')[2];
+                    commentcommentitem+="{commentitemid:"+commentitemid+",expect:"+expect+",real:"+real+"},";
+                }
+            });
+            commentcommentitem=commentcommentitem.substring(0,commentcommentitem.length-1)+"]";
+           
+            //点评意见
+            var commentopinion="[";
+            $(".OpinionItemInput").each(function(){
+                var opinionid=$(this).val();
+                commentopinion+="{opinionid:"+opinionid+"},";
+            });
+            commentopinion=commentopinion.substring(0,commentopinion.length-1)+"]";
+
+            var data = {userid:userid,areaid:areaid,classinfoid:classinfoid,sex:sex,ageround:ageround,domain:domain,job:job,contents:contents,
+                commentcommentitem:eval(commentcommentitem),commentopinion:eval(commentopinion)};
+            
+            $.ajax({
+                url:"/app/savecommentcontent",
+                data:JSON.stringify(data),
+                type:"POST",
+                contentType:"application/json",
+                success:function(data)
+                {
+                    var jsondata = eval(data);
+                    if (jsondata.result) {
+                        alert('提交成功！');
+                        window.location.href = "/app/selecttheme";
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

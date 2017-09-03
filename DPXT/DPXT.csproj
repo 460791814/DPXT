@@ -198,6 +198,19 @@
     <Content Include="Skins\admin\vendor\morrisjs\morris.min.js" />
     <Content Include="Skins\admin\vendor\raphael\raphael.js" />
     <Content Include="Skins\admin\vendor\raphael\raphael.min.js" />
+    <Content Include="Skins\app\css\reset.css" />
+    <Content Include="Skins\app\css\style.css" />
+    <Content Include="Skins\app\images\d_03.png" />
+    <Content Include="Skins\app\images\fh.png" />
+    <Content Include="Skins\app\images\sy_02.png" />
+    <Content Include="Skins\app\images\sy_05.png" />
+    <Content Include="Skins\app\images\sy_08.png" />
+    <Content Include="Skins\app\images\sy_11.png" />
+    <Content Include="Skins\app\images\s_03.png" />
+    <Content Include="Skins\app\images\s_07.png" />
+    <Content Include="Skins\app\images\s_09.png" />
+    <Content Include="Skins\app\js\jquery.js" />
+    <Content Include="Skins\app\js\pub.js" />
     <Content Include="Skins\artDialog\.gitignore" />
     <Content Include="Skins\artDialog\css\dialog.css" />
     <Content Include="Skins\artDialog\dist\dialog-plus.js" />
@@ -374,8 +387,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AppAuthAttribute.cs" />
     <Compile Include="App_Start\AuthAttribute.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\CommentItemController.cs" />
     <Compile Include="Controllers\CommentTypeController.cs" />
     <Compile Include="Controllers\FoodController.cs" />
@@ -510,6 +525,9 @@
     <Content Include="Views\PC\Opinion.cshtml" />
     <Content Include="Views\PC\UserService.cshtml" />
     <Content Include="Views\PC\FoodLike.cshtml" />
+    <Content Include="Views\App\Login.cshtml" />
+    <Content Include="Views\App\SelectTheme.cshtml" />
+    <Content Include="Views\App\CommentContent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
