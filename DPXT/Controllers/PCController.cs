@@ -1,5 +1,6 @@
 ﻿using Comp;
 using DAL;
+using DPXT.App_Start;
 using Model;
 using Newtonsoft.Json;
 using System;
@@ -28,7 +29,7 @@ namespace DPXT.Controllers
         {
             return View();
         }
-
+        
         /// <summary>
         /// 配餐服务意见
         /// </summary>
@@ -45,9 +46,10 @@ namespace DPXT.Controllers
             ViewBag.list = opionList;
             return View();
         }
+        [PCAuthAttribute]
         public String SaveOpinion(dp_servicecomplain model)
         {
-
+            user = HttpContext.Session["user_pc"] as E_User;
             int servicecomplainid = dServiceComplain.Add(new dp_servicecomplain()
             {
                 classinfoid = user.classinfoid,
@@ -78,8 +80,10 @@ namespace DPXT.Controllers
             }
             return JsonConvert.SerializeObject(new { result = "True" });
         }
+        [PCAuthAttribute]
         public ActionResult UserService()
         {
+            user = HttpContext.Session["user_pc"] as E_User;
             int total = 0;
             var list = dPerson.GetList(new E_Person() {
                 classinfoid = user.classinfoid,
@@ -90,8 +94,10 @@ namespace DPXT.Controllers
             return View();
 
         }
+        [PCAuthAttribute]
         public ActionResult FoodLike()
         {
+            user = HttpContext.Session["user_pc"] as E_User;
             int total = 0;
             var list=  dFood.GetList(new E_Food() {
                 classinfoid = user.classinfoid,
@@ -102,39 +108,37 @@ namespace DPXT.Controllers
             ViewBag.list = list;
             return View();
         }
+        [PCAuthAttribute]
+        public String FoodLikeAjax()
+        {
+            user = HttpContext.Session["user_pc"] as E_User;
+            int total = 0;
+            var list = dFood.GetList(new E_Food()
+            {
+                classinfoid = user.classinfoid,
+                areaid = user.areaid,
+                PageSize = 10000,
+                startaddtime = Convert.ToDateTime(DateTime.Now.ToString("D"))
+            }, ref total);
+            return JsonConvert.SerializeObject(list);
+        }
+        /// <summary>
+        ///查看结果
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult FoodResult() {
+            return View();
+        }
         public bool UpdateFoodHit(E_Food model)
         {
           return  dFood.UpdateHits(model);
             
         }
-        /// <summary>
-        /// 登录过滤器 针对该控制的所有方法
-        /// </summary>
-        /// <param name="filterContext"></param>
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+ 
+        public ActionResult Login()
         {
-            base.OnActionExecuting(filterContext);
-
-            if (filterContext.HttpContext.Session["user_pc"] == null)
-            {
-                E_User model = new E_User();
-                model.username = Utils.GetCookies("username");
-                model.password = Utils.GetCookies("password");
-
-                E_User eUser = dUser.GetInfoByName(model);
-                if (eUser == null)
-                {
-                    filterContext.Result = new RedirectResult("/PC/Login/");
-                    return;
-                }
-                if (eUser.password != model.password)
-                {
-                    filterContext.Result = new RedirectResult("/PC/Login/");
-                    return;
-                }
-                filterContext.HttpContext.Session["user_pc"] = eUser;
-            }
-            user = filterContext.HttpContext.Session["user_pc"] as E_User;
+            return View();
         }
+      
     }
 }

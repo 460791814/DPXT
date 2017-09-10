@@ -333,6 +333,7 @@
     <Content Include="Skins\PC\images\tab_06.jpg" />
     <Content Include="Skins\PC\images\t_03.png" />
     <Content Include="Skins\PC\images\xyj_03.jpg" />
+    <Content Include="Skins\PC\js\echarts.simple.min.js" />
     <Content Include="Skins\PC\js\jquery.js" />
     <Content Include="Skins\PC\js\pub.js" />
     <Content Include="Skins\PC\js\SuperSlide.js" />
@@ -390,6 +391,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AppAuthAttribute.cs" />
     <Compile Include="App_Start\AuthAttribute.cs" />
+    <Compile Include="App_Start\PCAuthAttribute.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -531,6 +533,7 @@
     <Content Include="Views\App\SelectTheme.cshtml" />
     <Content Include="Views\App\CommentContent.cshtml" />
     <Content Include="Views\PC\Login.cshtml" />
+    <Content Include="Views\PC\FoodResult.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

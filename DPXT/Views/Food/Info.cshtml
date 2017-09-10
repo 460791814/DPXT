@@ -51,8 +51,8 @@
             <div class="form-group">
                 <label>菜品名称：</label>
                 <input class="form-control" id="foodname" value="@info.foodname">
-                <label>厨师名称：</label>
-                @*<input class="form-control" id="cookname" value="@info.pname">*@
+                @*<label>厨师名称：</label>
+          
 
                 <select class="form-control" id="cook" >
 
@@ -64,7 +64,7 @@
                             <option value="@item.id" @((item.id == info.pid) ? "selected" : "")>@item.name</option>
                         }
                     }
-                </select>
+                </select>*@
 
                 <label>作业区：</label>
                 <select class="form-control" id="area" onchange="loadclassinfolist(0)">
@@ -117,7 +117,8 @@
             var hid = $("#hid").val();
             var areaid = $("#area").val();
             var classinfoid = $("#classinfo").val();
-            var data = "foodname=" + foodname + "&foodid=" + hid + "&pname=" + $("#cook option:selected").text()  + "&pid=" + $("#cook").val() + "&areaid=" + areaid + "&classinfoid=" + classinfoid + "&pic=" + $("#pic").val()
+            //+ "&pname=" + $("#cook option:selected").text()  + "&pid=" + $("#cook").val()
+            var data = "foodname=" + foodname + "&foodid=" + hid  + "&areaid=" + areaid + "&classinfoid=" + classinfoid + "&pic=" + $("#pic").val()
             //ajax
             $.post("/Food/Save", data, function (data) {
                 if (data == "True") {

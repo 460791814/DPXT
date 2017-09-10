@@ -1,0 +1,121 @@
+﻿@using Model;
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="index,follow" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="/Skins/PC/css/reset.css">
+    <link rel="stylesheet" href="/Skins/PC/css/style.css">
+    <script src="/Skins/PC/js/jquery.js"></script>
+    <script src="/Skins/PC/js/echarts.simple.min.js"></script>
+ 
+</head>
+<body>
+
+    <!-- header start -->
+    <div class="comheader">
+        <h1>渤西终端欢迎您！</h1>
+        <h2>@DataHelper.GetCurrentTime()</h2>
+    </div>
+
+    <div class="combody">
+        <div class="mainbd">
+            <div class="comtitle">查看结果</div>
+            <div class="course" >
+               <div id="main" style="height:650px;">
+
+               </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="comfooter">
+        <div class="comfooter-btns">
+ 
+            <a class="fl" href="/PC/Index">返回首页</a>
+          
+        </div>
+    </div>
+
+    <script>
+        var foodnames = [];
+        var foodpraise = [];
+        var foodbad = [];
+        $.ajax({
+            type: 'POST',
+            url: '/PC/FoodLikeAjax',
+            async: false,
+            data: null,
+            success: function (data) {
+                var d = $.parseJSON(data);
+                for (var i = 0; i < d.length; i++) {
+                    foodnames.push(d[i].foodname);
+                    foodpraise.push(d[i].praise);
+                    foodbad.push(d[i].bad);
+                }
+
+            }
+             
+        });
+
+       // app.title = '世界人口总量 - 条形图';
+
+        var option = {
+            title: {
+                text: '菜品评价统计',
+                
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {
+                data: ['2011年', '2012年']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: foodnames
+
+            },
+            yAxis: {
+                type: 'value',
+                boundaryGap: [0, 0.01]
+            },
+            series: [
+                {
+                    name: '赞',
+                    type: 'bar',
+                    data: foodpraise
+                },
+                {
+                    name: '差',
+                    type: 'bar',
+                    data: foodbad
+                }
+            ]
+        };
+        var myChart = echarts.init(document.getElementById('main'));
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+       
+    </script>
+ 
+
+</body>
+</html>

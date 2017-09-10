@@ -72,7 +72,7 @@
                                     <td>@(String.IsNullOrEmpty(item.pic) ? "否" : "是")</td>
                                     <td>@(item.isdisplay==1 ? "否" : "是")</td>
                                     <td>
-                                        <a href="javascript:void(0)" onclick="display(@item.foodid,@(item.isdisplay==1?0:1))">@(item.isdisplay == 1 ? "显示" : "隐藏")</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="javascript:void(0)" onclick="display(@item.foodid,@(item.isdisplay==1?0:1))">@(item.isdisplay == 1 ? "显示" : "隐藏")</a>&nbsp;&nbsp;&nbsp;&nbsp;
                                     <a href="javascript:void(0)" onclick="update(@item.foodid)">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="del(@item.foodid)">删除</a></td>
                                 </tr>
                             }
